@@ -1,0 +1,2601 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kelas IX C - SMP Negeri 1 Panggang | Website Resmi Kelas</title>
+    <meta name="description" content="Website resmi Kelas IX C SMP Negeri 1 Panggang. Kenali 30 anggota kelas, pengurus, jadwal, dan berbagai kegiatan kami.">
+    <meta name="keywords" content="kelas IX C, SMP Negeri 1 Panggang, siswa, pendidikan, sekolah, kelas 9">
+    <meta name="author" content="Kelas IX C">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    
+    <!-- External Resources -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ===== RESET & BASE STYLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: #0a0a0f;
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* ===== PAGE CONTAINER ===== */
+        .page-container {
+            display: none;
+            opacity: 0;
+            animation: fadeIn 0.5s ease forwards;
+        }
+        
+        .page-container.active {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* ===== LOADING SCREEN ===== */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        
+        .loading-content {
+            text-align: center;
+        }
+        
+        .loading-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .loading-logo i {
+            font-size: 3rem;
+            color: #00d4ff;
+            animation: logoSpin 3s infinite linear;
+        }
+        
+        .loading-logo span {
+            font-size: 2rem;
+            color: #fff;
+            font-weight: 700;
+        }
+        
+        .loading-bar {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto 20px;
+        }
+        
+        .loading-progress {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #00d4ff, #0099cc);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+        
+        .loading-text {
+            color: #ccc;
+            font-size: 1rem;
+        }
+        
+        @keyframes logoSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* ===== HEADER & NAVIGATION ===== */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-brand h1 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 5px;
+            z-index: 1001;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+        
+        .nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .nav-link:hover {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+        }
+        
+        .nav-link.active {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.2);
+        }
+        
+        /* ===== MUSIC PLAYER ===== */
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 900;
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 25px;
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease;
+        }
+        
+        .music-player:hover {
+            transform: translateY(-3px);
+        }
+        
+        .music-btn {
+            background: #00d4ff;
+            color: #0a0a0f;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            background: #0099cc;
+            transform: scale(1.1);
+        }
+        
+        .music-btn.paused {
+            background: #555;
+        }
+        
+        .music-info {
+            color: #ccc;
+            font-size: 0.85rem;
+            max-width: 150px;
+        }
+        
+        .music-info span {
+            color: #00d4ff;
+            font-weight: 500;
+        }
+        
+        /* ===== COMMON STYLES ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .section {
+            padding: 100px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .section-title p {
+            font-size: 1.1rem;
+            color: #ccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .modern-card {
+            background: rgba(26, 26, 46, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modern-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+        
+        .neon-button {
+            position: relative;
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+        }
+        
+        .neon-button:hover {
+            background: rgba(0, 212, 255, 0.1);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+            transform: translateY(-3px);
+        }
+        
+        /* ===== HOME PAGE / DASHBOARD ===== */
+        .home-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        .home-page::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 107, 107, 0.1) 0%, transparent 50%);
+            z-index: 0;
+        }
+        
+        .home-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .home-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        
+        .highlight {
+            color: #00d4ff;
+            background: linear-gradient(45deg, #00d4ff, #0099cc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .typing-text {
+            font-size: 1.8rem;
+            color: #00d4ff;
+            margin-bottom: 1.5rem;
+            min-height: 2.5rem;
+            display: inline-block;
+        }
+        
+        .cursor {
+            display: inline-block;
+            width: 3px;
+            background-color: #00d4ff;
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .home-text p {
+            font-size: 1.1rem;
+            color: #ccc;
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .home-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .home-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .class-logo {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 107, 107, 0.1) 100%);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border: 3px solid rgba(0, 212, 255, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+        }
+        
+        .class-logo i {
+            font-size: 6rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+        }
+        
+        .class-logo h3 {
+            font-size: 2rem;
+            color: #fff;
+            text-align: center;
+        }
+        
+        /* ===== ANGGOTA PAGE ===== */
+        .anggota-page {
+            padding-top: 80px;
+        }
+        
+        .member-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .member-card {
+            padding: 1.5rem;
+            text-align: center;
+            min-height: 420px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .member-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00d4ff;
+            margin: 0 auto 1.5rem;
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .member-card:hover .member-photo {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(0, 212, 255, 0.6);
+        }
+        
+        .member-name {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+        
+        .member-role {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+            padding: 4px 16px;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            display: inline-block;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .member-info {
+            text-align: left;
+            margin-top: 1rem;
+            width: 100%;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.8rem;
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        .info-item i {
+            color: #00d4ff;
+            width: 18px;
+            font-size: 1rem;
+        }
+        
+        /* Search Box Styling */
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto 3rem;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border-radius: 25px;
+            background: rgba(26, 26, 46, 0.8);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #00d4ff;
+        }
+        
+        /* ===== PENGURUS PAGE ===== */
+        .pengurus-header {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        /* ===== WALI PAGE ===== */
+        .wali-kelas-info {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            background: rgba(0, 212, 255, 0.1);
+            backdrop-filter: blur(20px);
+            padding: 3rem;
+            border-radius: 20px;
+            margin-top: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .wali-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #00d4ff;
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.4);
+        }
+        
+        .wali-details h3 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .wali-details p {
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ccc;
+        }
+        
+        .wali-details i {
+            color: #00d4ff;
+            width: 20px;
+        }
+        
+        /* ===== GALERI PAGE ===== */
+        .gallery-page {
+            padding-top: 80px;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            cursor: pointer;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.4s ease;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            border-color: #00d4ff;
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            color: white;
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* ===== JADWAL PAGE ===== */
+        .jadwal-page {
+            padding-top: 80px;
+        }
+        
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: rgba(15, 15, 35, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+        
+        .schedule-table th {
+            background: rgba(0, 212, 255, 0.2);
+            color: white;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.3);
+        }
+        
+        .schedule-table td {
+            padding: 1.2rem;
+            text-align: center;
+            color: #ccc;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .schedule-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .schedule-table tr:hover td {
+            background: rgba(0, 212, 255, 0.1);
+            color: #fff;
+        }
+        
+        /* ===== INFO PAGE ===== */
+        .info-page {
+            padding-top: 80px;
+        }
+        
+        .class-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .info-box {
+            padding: 2.5rem;
+        }
+        
+        .info-box h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .info-box p {
+            color: #ccc;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+        
+        .info-box ul {
+            margin-left: 1.5rem;
+            color: #ccc;
+        }
+        
+        .info-box li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* ===== FOOTER ===== */
+        .footer {
+            background: rgba(10, 10, 15, 0.9);
+            backdrop-filter: blur(20px);
+            padding: 3rem 0 2rem;
+            border-top: 1px solid rgba(0, 212, 255, 0.3);
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        
+        .footer h3 {
+            color: #00d4ff;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+        
+        .footer p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .footer-social a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-social a:hover {
+            color: #00d4ff;
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-3px);
+        }
+        
+        .footer-copyright {
+            color: #888;
+            font-size: 0.9rem;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* ===== MODAL ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 2px solid #00d4ff;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.5);
+        }
+        
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2.5rem;
+            cursor: pointer;
+            background: rgba(0, 0, 0, 0.7);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: 2px solid #00d4ff;
+            z-index: 2001;
+        }
+        
+        .close-modal:hover {
+            background: #00d4ff;
+            color: #0f0f23;
+            transform: rotate(90deg);
+        }
+        
+        /* ===== SCROLL TO TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: #00d4ff;
+            color: #fff;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 212, 255, 0.4);
+        }
+        
+        .scroll-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: #0099cc;
+            transform: translateY(-3px);
+        }
+        
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .member-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            .home-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+            
+            .home-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .class-info {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .wali-kelas-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 2rem;
+                padding: 2rem;
+            }
+            
+            .wali-photo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .member-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 100%);
+                background: rgba(15, 15, 35, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 0;
+                transition: all 0.3s ease;
+                transform: translateX(-100%);
+                z-index: 999;
+                padding-top: 2rem;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                transform: translateX(0);
+            }
+            
+            .nav-menu li {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .nav-link {
+                padding: 1rem;
+                border-radius: 0;
+                justify-content: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            .nav-link:last-child {
+                border-bottom: none;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .member-grid, .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .gallery-item {
+                height: 300px;
+            }
+            
+            .schedule-table {
+                font-size: 0.9rem;
+            }
+            
+            .schedule-table th,
+            .schedule-table td {
+                padding: 0.8rem;
+            }
+            
+            .info-box {
+                padding: 1.5rem;
+            }
+            
+            .member-card {
+                min-height: 380px;
+            }
+            
+            .class-logo {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .music-player {
+                bottom: 80px;
+                right: 10px;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .home-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .typing-text {
+                font-size: 1.4rem;
+                min-height: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .member-photo {
+                width: 120px;
+                height: 120px;
+            }
+            
+            .neon-button {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .home-buttons {
+                justify-content: center;
+            }
+            
+            .footer-social {
+                gap: 1rem;
+            }
+            
+            .footer-social a {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .loading-logo span {
+                font-size: 1.5rem;
+            }
+            
+            .loading-bar {
+                width: 250px;
+            }
+            
+            .class-logo {
+                width: 250px;
+                height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <i class="fas fa-school"></i>
+                <span>Kelas IX C</span>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Memuat Website...</p>
+        </div>
+    </div>
+    
+    <!-- Music Player -->
+    <div class="music-player">
+        <button class="music-btn" id="musicToggle" aria-label="Toggle music">
+            <i class="fas fa-play"></i>
+        </button>
+        <div class="music-info">
+            <span>Kelas IX C Theme</span>
+        </div>
+    </div>
+    
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-brand">
+                <h1><i class="fas fa-school"></i> Kelas IX C</h1>
+            </div>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#anggota" class="nav-link" data-page="anggota"><i class="fas fa-users"></i> 30 Anggota</a></li>
+                <li><a href="#pengurus" class="nav-link" data-page="pengurus"><i class="fas fa-user-tie"></i> Pengurus</a></li>
+                <li><a href="#wali" class="nav-link" data-page="wali"><i class="fas fa-chalkboard-teacher"></i> Wali Kelas</a></li>
+                <li><a href="#galeri" class="nav-link" data-page="galeri"><i class="fas fa-images"></i> Galeri</a></li>
+                <li><a href="#jadwal" class="nav-link" data-page="jadwal"><i class="fas fa-calendar-alt"></i> Jadwal</a></li>
+                <li><a href="#info" class="nav-link" data-page="info"><i class="fas fa-info-circle"></i> Info</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <!-- Pages -->
+    <main>
+        <!-- Home Page -->
+        <div id="home-page" class="page-container active">
+            <section class="home-page">
+                <div class="container">
+                    <div class="home-content">
+                        <div class="home-text">
+                            <h1>Selamat Datang di <span class="highlight">Kelas IX C</span></h1>
+                            <h2 class="typing-text" id="typingElement"></h2>
+                            <p>Kelas dengan 30 siswa berprestasi, kreatif, dan solidaritas tinggi. Mari kenali semua anggota kelas IX C SMP Negeri 1 Panggang!</p>
+                            
+                            <div class="stats-grid">
+                                <div class="stat-item modern-card">
+                                    <div class="stat-number">30</div>
+                                    <div class="stat-label">Total Anggota</div>
+                                </div>
+                                <div class="stat-item modern-card">
+                                    <div class="stat-number">14</div>
+                                    <div class="stat-label">Siswa Putra</div>
+                                </div>
+                                <div class="stat-item modern-card">
+                                    <div class="stat-number">16</div>
+                                    <div class="stat-label">Siswa Putri</div>
+                                </div>
+                            </div>
+                            
+                            <div class="home-buttons">
+                                <a href="#anggota" class="neon-button" data-page="anggota"><i class="fas fa-users"></i> Lihat 30 Anggota</a>
+                                <a href="#galeri" class="neon-button" data-page="galeri"><i class="fas fa-images"></i> Lihat Galeri</a>
+                            </div>
+                        </div>
+                        <div class="home-image">
+                            <div class="class-logo">
+                                <i class="fas fa-graduation-cap"></i>
+                                <h3>Kelas IX C</h3>
+                                <p style="color: #ccc; margin-top: 0.5rem; font-size: 1.1rem;">SMP Negeri 1 Panggang</p>
+                                <p style="color: #00d4ff; margin-top: 0.5rem; font-size: 1.2rem; font-weight: bold;">30 Anggota</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Anggota Page -->
+        <div id="anggota-page" class="page-container">
+            <section class="anggota-page">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-users"></i> 30 Anggota Kelas</h2>
+                        <p>Kenali semua 30 Anggota kelas IX C yang penuh bakat dan kreativitas</p>
+                    </div>
+                    
+                    <!-- Search Box -->
+                    <div class="search-box">
+                        <input type="text" id="searchAnggota" class="search-input" placeholder="Cari nama anggota...">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    
+                    <div class="member-grid">
+                        <!-- Anggota 1-4 (Pengurus Utama) -->
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Budi Santoso" class="member-photo">
+                            <h3 class="member-name">Budi Santoso</h3>
+                            <div class="member-role">Ketua Kelas</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Dokter</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-basketball-ball"></i>
+                                    <span><strong>Hobi:</strong> Basket</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Maya Sari" class="member-photo">
+                            <h3 class="member-name">Maya Sari</h3>
+                            <div class="member-role">Wakil Ketua</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Arsitek</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-paint-brush"></i>
+                                    <span><strong>Hobi:</strong> Melukis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Fajar Nugroho" class="member-photo">
+                            <h3 class="member-name">Fajar Nugroho</h3>
+                            <div class="member-role">Sekretaris</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Jurnalis</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-pen"></i>
+                                    <span><strong>Hobi:</strong> Menulis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Citra Lestari" class="member-photo">
+                            <h3 class="member-name">Citra Lestari</h3>
+                            <div class="member-role">Bendahara</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Akuntan</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-calculator"></i>
+                                    <span><strong>Hobi:</strong> Matematika</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Anggota 5-30 -->
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Dewi Anggraini" class="member-photo">
+                            <h3 class="member-name">Dewi Anggraini</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Guru</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-book"></i>
+                                    <span><strong>Hobi:</strong> Membaca</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Rizky Pratama" class="member-photo">
+                            <h3 class="member-name">Rizky Pratama</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Programmer</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-code"></i>
+                                    <span><strong>Hobi:</strong> Coding</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Sari Utami" class="member-photo">
+                            <h3 class="member-name">Sari Utami</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Perawat</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-heartbeat"></i>
+                                    <span><strong>Hobi:</strong> Olahraga</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Andi Wijaya" class="member-photo">
+                            <h3 class="member-name">Andi Wijaya</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Insinyur</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-cogs"></i>
+                                    <span><strong>Hobi:</strong> Robotika</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Nina Septyani" class="member-photo">
+                            <h3 class="member-name">Nina Septyani</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Psikolog</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-brain"></i>
+                                    <span><strong>Hobi:</strong> Membaca</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Rudi Hartono" class="member-photo">
+                            <h3 class="member-name">Rudi Hartono</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Atlet</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-running"></i>
+                                    <span><strong>Hobi:</strong> Lari</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Lisa Permata" class="member-photo">
+                            <h3 class="member-name">Lisa Permata</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Designer</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-palette"></i>
+                                    <span><strong>Hobi:</strong> Desain</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Bambang Surya" class="member-photo">
+                            <h3 class="member-name">Bambang Surya</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Pilot</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-plane"></i>
+                                    <span><strong>Hobi:</strong> Pesawat</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Rina Melati" class="member-photo">
+                            <h3 class="member-name">Rina Melati</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Penyanyi</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-music"></i>
+                                    <span><strong>Hobi:</strong> Menyanyi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Toni Gunawan" class="member-photo">
+                            <h3 class="member-name">Toni Gunawan</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Polisi</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-shield-alt"></i>
+                                    <span><strong>Hobi:</strong> Martial Arts</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Mega Sari" class="member-photo">
+                            <h3 class="member-name">Mega Sari</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Pengacara</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <span><strong>Hobi:</strong> Debat</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Dodi Pratama" class="member-photo">
+                            <h3 class="member-name">Dodi Pratama</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> YouTuber</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-video"></i>
+                                    <span><strong>Hobi:</strong> Videografi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Putri Amelia" class="member-photo">
+                            <h3 class="member-name">Putri Amelia</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Dokter Hewan</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-paw"></i>
+                                    <span><strong>Hobi:</strong> Hewan</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Eko Santoso" class="member-photo">
+                            <h3 class="member-name">Eko Santoso</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Chef</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-utensils"></i>
+                                    <span><strong>Hobi:</strong> Memasak</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Wulan Sari" class="member-photo">
+                            <h3 class="member-name">Wulan Sari</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Penulis</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-pen-fancy"></i>
+                                    <span><strong>Hobi:</strong> Menulis Novel</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Hadi Nugroho" class="member-photo">
+                            <h3 class="member-name">Hadi Nugroho</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Pengusaha</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-chart-line"></i>
+                                    <span><strong>Hobi:</strong> Bisnis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Siska Wati" class="member-photo">
+                            <h3 class="member-name">Siska Wati</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Ilmuwan</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-flask"></i>
+                                    <span><strong>Hobi:</strong> Eksperimen</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Joko Susilo" class="member-photo">
+                            <h3 class="member-name">Joko Susilo</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Fotografer</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-camera"></i>
+                                    <span><strong>Hobi:</strong> Fotografi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Ani Rahayu" class="member-photo">
+                            <h3 class="member-name">Ani Rahayu</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Perancang Busana</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-tshirt"></i>
+                                    <span><strong>Hobi:</strong> Fashion</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Bagus Setiawan" class="member-photo">
+                            <h3 class="member-name">Bagus Setiawan</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Atlit Basket</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-basketball-ball"></i>
+                                    <span><strong>Hobi:</strong> Basket</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Lina Septiani" class="member-photo">
+                            <h3 class="member-name">Lina Septiani</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Diplomat</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-globe"></i>
+                                    <span><strong>Hobi:</strong> Bahasa Asing</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Rizki Ramadhan" class="member-photo">
+                            <h3 class="member-name">Rizki Ramadhan</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Astronot</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-rocket"></i>
+                                    <span><strong>Hobi:</strong> Astronomi</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Diana Putri" class="member-photo">
+                            <h3 class="member-name">Diana Putri</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Artis</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-film"></i>
+                                    <span><strong>Hobi:</strong> Akting</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Firman Syah" class="member-photo">
+                            <h3 class="member-name">Firman Syah</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Musisi</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-guitar"></i>
+                                    <span><strong>Hobi:</strong> Main Gitar</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Gita Maharani" class="member-photo">
+                            <h3 class="member-name">Gita Maharani</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Peneliti</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-microscope"></i>
+                                    <span><strong>Hobi:</strong> Riset</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Hendra Kurnia" class="member-photo">
+                            <h3 class="member-name">Hendra Kurnia</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Tentara</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-star"></i>
+                                    <span><strong>Hobi:</strong> Militer</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Indah Permatasari" class="member-photo">
+                            <h3 class="member-name">Indah Permatasari</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Dosen</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                    <span><strong>Hobi:</strong> Mengajar</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Joni Saputra" class="member-photo">
+                            <h3 class="member-name">Joni Saputra</h3>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> Atlet Renang</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-swimmer"></i>
+                                    <span><strong>Hobi:</strong> Renang</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Pengurus Page -->
+        <div id="pengurus-page" class="page-container">
+            <section class="section" style="padding-top: 80px;">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-user-tie"></i> Pengurus Kelas</h2>
+                        <p>Struktur kepengurusan kelas IX C yang solid dan berdedikasi</p>
+                    </div>
+                    
+                    <div class="pengurus-header modern-card">
+                        <h3 style="color: #00d4ff; text-align: center; margin-bottom: 1rem;">Struktur Pengurus Kelas IX C</h3>
+                        <p style="text-align: center; color: #ccc;">Kepengurusan periode 2025/2026 terdiri dari 4 pengurus utama</p>
+                    </div>
+                    
+                    <div class="member-grid">
+                        <!-- Ketua Kelas -->
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Budi Santoso" class="member-photo">
+                            <h3 class="member-name">Budi Santoso</h3>
+                            <div class="member-role">Ketua Kelas</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <span><strong>Tugas:</strong> Memimpin rapat, koordinasi pengurus</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-award"></i>
+                                    <span><strong>Prestasi:</strong> Juara OSN Matematika</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Wakil Ketua -->
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Maya Sari" class="member-photo">
+                            <h3 class="member-name">Maya Sari</h3>
+                            <div class="member-role">Wakil Ketua</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <span><strong>Tugas:</strong> Menggantikan ketua, bantu koordinasi</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-award"></i>
+                                    <span><strong>Prestasi:</strong> Juara Lomba Debat</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sekretaris -->
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Fajar Nugroho" class="member-photo">
+                            <h3 class="member-name">Fajar Nugroho</h3>
+                            <div class="member-role">Sekretaris</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <span><strong>Tugas:</strong> Dokumentasi, notulensi rapat</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-award"></i>
+                                    <span><strong>Prestasi:</strong> Juara Menulis Cerpen</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bendahara -->
+                        <div class="member-card modern-card">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Citra Lestari" class="member-photo">
+                            <h3 class="member-name">Citra Lestari</h3>
+                            <div class="member-role">Bendahara</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-tasks"></i>
+                                    <span><strong>Tugas:</strong> Kelola keuangan kelas</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-award"></i>
+                                    <span><strong>Prestasi:</strong> Juara OSN Ekonomi</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Wali Kelas Page -->
+        <div id="wali-page" class="page-container">
+            <section class="section" style="padding-top: 80px;">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-chalkboard-teacher"></i> Wali Kelas</h2>
+                        <p>Pembimbing dan pengarah perjalanan akademik kami</p>
+                    </div>
+                    <div class="wali-kelas-info modern-card">
+                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Dr. Agus Setiawan" class="wali-photo">
+                        <div class="wali-details">
+                            <h3>Dr. Agus Setiawan, M.Pd.</h3>
+                            <p><i class="fas fa-book"></i> <strong>Mata Pelajaran:</strong> Matematika</p>
+                            <p><i class="fas fa-award"></i> <strong>Pengalaman:</strong> 15 Tahun Mengajar</p>
+                            <p><i class="fas fa-graduation-cap"></i> <strong>Pendidikan:</strong> S3 Pendidikan Matematika</p>
+                            <p><i class="fas fa-heart"></i> <strong>Motto:</strong> "Setiap siswa adalah bintang yang bersinar dengan caranya sendiri"</p>
+                            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> agus.setiawan@sekolah.sch.id</p>
+                            <p><i class="fas fa-phone"></i> <strong>Telepon:</strong> 0812-3456-7890</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Galeri Page -->
+        <div id="galeri-page" class="page-container">
+            <section class="gallery-page">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-images"></i> Galeri Kelas</h2>
+                        <p>Kumpulan momen berharga dan kenangan indah selama di kelas IX C</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <!-- Row 1 - 3 Images -->
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Deskripsi isi sendiri">
+                            <div class="gallery-overlay">
+                                <p>Hari Pertama Sekolah</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Sesi belajar kelompok yang seru">
+                            <div class="gallery-overlay">
+                                <p>Belajar Kelompok</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Praktikum IPA di laboratorium">
+                            <div class="gallery-overlay">
+                                <p>Praktikum IPA</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 2 - 3 Images -->
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Upacara bendera hari Senin">
+                            <div class="gallery-overlay">
+                                <p>Upacara Bendera</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Lomba 17 Agustus tahun lalu">
+                            <div class="gallery-overlay">
+                                <p>Lomba 17 Agustus</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Study tour ke museum nasional">
+                            <div class="gallery-overlay">
+                                <p>Study Tour Museum</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Row 3 - 3 Images -->
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Kegiatan olahraga bersama">
+                            <div class="gallery-overlay">
+                                <p>Kegiatan Olahraga</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Presentasi di depan kelas">
+                            <div class="gallery-overlay">
+                                <p>Presentasi Kelas</p>
+                            </div>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Kegiatan ekstrakurikuler">
+                            <div class="gallery-overlay">
+                                <p>Ekstrakurikuler</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Jadwal Page -->
+        <div id="jadwal-page" class="page-container">
+            <section class="jadwal-page">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-calendar-alt"></i> Jadwal Kelas</h2>
+                        <p>Jadwal piket dan pelajaran kelas IX C</p>
+                    </div>
+                    
+                    <h3 style="color: #00d4ff; margin-bottom: 1.5rem; text-align: center;"><i class="fas fa-broom"></i> Jadwal Piket 30 Anggota</h3>
+                    <table class="schedule-table modern-card">
+                        <thead>
+                            <tr>
+                                <th>Hari</th>
+                                <th>Tim Piket</th>
+                                <th>Anggota (5 orang/hari)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Senin</td>
+                                <td>Tim A</td>
+                                <td>Budi, Maya, Fajar, Citra, Dewi</td>
+                            </tr>
+                            <tr>
+                                <td>Selasa</td>
+                                <td>Tim B</td>
+                                <td>Rizky, Sari, Andi, Nina, Rudi</td>
+                            </tr>
+                            <tr>
+                                <td>Rabu</td>
+                                <td>Tim C</td>
+                                <td>Lisa, Bambang, Rina, Toni, Mega</td>
+                            </tr>
+                            <tr>
+                                <td>Kamis</td>
+                                <td>Tim D</td>
+                                <td>Dodi, Putri, Eko, Wulan, Hadi</td>
+                            </tr>
+                            <tr>
+                                <td>Jumat</td>
+                                <td>Tim E</td>
+                                <td>Siska, Joko, Ani, Bagus, Lina</td>
+                            </tr>
+                            <tr>
+                                <td>Sabtu</td>
+                                <td>Tim F</td>
+                                <td>Rizki, Diana, Firman, Gita, Hendra</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 style="color: #00d4ff; margin: 3rem 0 1.5rem 0; text-align: center;"><i class="fas fa-book-open"></i> Jadwal Pelajaran</h3>
+                    <table class="schedule-table modern-card">
+                        <thead>
+                            <tr>
+                                <th>Hari</th>
+                                <th>Jam 1-2</th>
+                                <th>Jam 3-4</th>
+                                <th>Jam 5-6</th>
+                                <th>Jam 7-8</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Senin</td>
+                                <td>Matematika</td>
+                                <td>IPA</td>
+                                <td>Bahasa Indonesia</td>
+                                <td>PPKn</td>
+                            </tr>
+                            <tr>
+                                <td>Selasa</td>
+                                <td>Bahasa Inggris</td>
+                                <td>IPS</td>
+                                <td>Seni Budaya</td>
+                                <td>PJOK</td>
+                            </tr>
+                            <tr>
+                                <td>Rabu</td>
+                                <td>Matematika</td>
+                                <td>IPA</td>
+                                <td>Bahasa Daerah</td>
+                                <td>Prakarya</td>
+                            </tr>
+                            <tr>
+                                <td>Kamis</td>
+                                <td>Bahasa Indonesia</td>
+                                <td>IPS</td>
+                                <td>Agama</td>
+                                <td>BK</td>
+                            </tr>
+                            <tr>
+                                <td>Jumat</td>
+                                <td>Bahasa Inggris</td>
+                                <td>TIK</td>
+                                <td>Pramuka</td>
+                                <td>Ekstrakurikuler</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+        
+        <!-- Info Page -->
+        <div id="info-page" class="page-container">
+            <section class="info-page">
+                <div class="container">
+                    <div class="section-title">
+                        <h2><i class="fas fa-info-circle"></i> Info Kelas</h2>
+                        <p>Informasi lengkap tentang kelas IX C dan sekolah kami</p>
+                    </div>
+                    <div class="class-info">
+                        <div class="info-box modern-card">
+                            <h3><i class="fas fa-school"></i> Deskripsi Kelas</h3>
+                            <p>Kelas IX C adalah kelas dengan 30 siswa berprestasi di SMP Negeri 1 Panggang. Terdiri dari siswa-siswa yang memiliki semangat belajar tinggi dan aktif dalam berbagai kegiatan sekolah.</p>
+                            <p><strong>Total Anggota:</strong> 30 siswa (14 putra, 16 putri)</p>
+                            <p><strong>Wali Kelas:</strong> Dr. Agus Setiawan, M.Pd.</p>
+                            <p><strong>Visi Kelas:</strong> "Menjadi kelas berprestasi yang berkarakter dan berkontribusi untuk masyarakat"</p>
+                            <p><strong>Misi Kelas:</strong></p>
+                            <ul>
+                                <li>Mencapai nilai UN tertinggi se-kota</li>
+                                <li>Aktif dalam kegiatan sosial</li>
+                                <li>Mengembangkan bakat dan minat setiap siswa</li>
+                                <li>Menjaga solidaritas dan kerjasama tim</li>
+                            </ul>
+                        </div>
+                        <div class="info-box modern-card">
+                            <h3><i class="fas fa-map-marker-alt"></i> Alamat Sekolah</h3>
+                            <p><strong>SMP Negeri 1 Panggang</strong></p>
+                            <p>Panggang III, Giriharjo, Kecamatan Panggang</p>
+                            <p>Kabupaten Gunung Kidul, Daerah Istimewa Yogyakarta</p>
+                            <p>Kode Pos: 55891</p>
+                            <br>
+                            <p><i class="fas fa-phone"></i> <strong>Telepon:</strong> (0274) 123456</p>
+                            <p><i class="fas fa-envelope"></i> <strong>Email:</strong> smpn1panggang@yahoo.co.id</p>
+                            <p><i class="fas fa-globe"></i> <strong>Website:</strong> smp1panggang.pendidikan.gunungkidulkab.go.id</p>
+                            <br>
+                            <p><i class="fas fa-award"></i> <strong>Akreditasi:</strong> A (Unggul)</p>
+                            <p><i class="fas fa-bus"></i> <strong>Akses Transportasi:</strong> Montor, Angkutan Desa</p>
+                            <p><i class="fas fa-parking"></i> <strong>Fasilitas:</strong> Laboratorium lengkap, perpustakaan digital, lapangan olahraga</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3>Kelas IX C - SMP Negeri 1 Panggang</h3>
+                <p>30 Anggota | Angkatan 2025/2026 - Bersatu dalam Prestasi, Solid dalam Kebersamaan</p>
+                <div class="footer-social">
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Website Kelas IX C. All rights reserved.</p>
+                    <p>Dibuat dengan <i class="fas fa-heart" style="color: #ff6b6b;"></i> untuk kenangan abadi</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Modal for Gallery -->
+    <div id="galleryModal" class="modal">
+        <span class="close-modal">&times;</span>
+        <div class="modal-content">
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+    
+    <!-- Scroll to Top Button -->
+    <button id="scrollTopBtn" class="scroll-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Audio Element -->
+    <audio id="backgroundMusic" loop>
+        <source src="https://files.catbox.moe/zdkr55.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    
+    <!-- JavaScript -->
+    <script>
+        'use strict';
+        
+        class KelasIXCWebsite {
+            constructor() {
+                this.currentPage = 'home';
+                this.isPlaying = false;
+                this.music = null;
+                this.init();
+            }
+            
+            init() {
+                this.setupLoadingScreen();
+                this.setupNavigation();
+                this.setupGallery();
+                this.setupScrollTop();
+                this.setupTypingEffect();
+                this.setupMusicPlayer();
+                this.setupSearchFunctionality();
+                this.setupDeviceOptimizations();
+            }
+            
+            setupLoadingScreen() {
+                const loadingScreen = document.querySelector('.loading-screen');
+                const progressBar = document.querySelector('.loading-progress');
+                
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 15 + 5;
+                    if (progress >= 100) {
+                        progress = 100;
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            loadingScreen.classList.add('hidden');
+                            setTimeout(() => {
+                                loadingScreen.style.display = 'none';
+                            }, 800);
+                        }, 500);
+                    }
+                    progressBar.style.width = `${progress}%`;
+                }, 200);
+            }
+            
+            setupNavigation() {
+                const hamburger = document.querySelector('.hamburger');
+                const navMenu = document.querySelector('.nav-menu');
+                const navLinks = document.querySelectorAll('.nav-link');
+                
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+                
+                document.addEventListener('click', (e) => {
+                    if (window.innerWidth <= 768 && 
+                        !hamburger.contains(e.target) && 
+                        !navMenu.contains(e.target) && 
+                        navMenu.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        navMenu.classList.remove('active');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const pageId = link.getAttribute('data-page');
+                        
+                        if (pageId && pageId !== this.currentPage) {
+                            this.navigateToPage(pageId);
+                        }
+                        
+                        navLinks.forEach(l => l.classList.remove('active'));
+                        link.classList.add('active');
+                        
+                        if (window.innerWidth <= 768) {
+                            hamburger.classList.remove('active');
+                            navMenu.classList.remove('active');
+                        }
+                    });
+                });
+                
+                window.addEventListener('popstate', (e) => {
+                    if (e.state && e.state.page) {
+                        this.navigateToPage(e.state.page, false);
+                    }
+                });
+            }
+            
+            navigateToPage(pageId, updateHistory = true) {
+                const currentPage = document.querySelector(`#${this.currentPage}-page`);
+                if (currentPage) {
+                    currentPage.classList.remove('active');
+                    setTimeout(() => {
+                        currentPage.style.display = 'none';
+                    }, 300);
+                }
+                
+                this.currentPage = pageId;
+                const newPage = document.querySelector(`#${pageId}-page`);
+                if (newPage) {
+                    newPage.style.display = 'block';
+                    setTimeout(() => {
+                        newPage.classList.add('active');
+                        window.scrollTo(0, 0);
+                    }, 50);
+                }
+                
+                if (updateHistory) {
+                    window.history.pushState({ page: pageId }, '', `#${pageId}`);
+                }
+                
+                this.updatePageTitle(pageId);
+                this.updateActiveNavLink(pageId);
+            }
+            
+            updatePageTitle(pageId) {
+                const titles = {
+                    'home': 'Home - Dashboard Kelas',
+                    'anggota': '30 Anggota Kelas',
+                    'pengurus': 'Pengurus Kelas',
+                    'wali': 'Wali Kelas',
+                    'galeri': 'Galeri Kelas',
+                    'jadwal': 'Jadwal Kelas',
+                    'info': 'Info Kelas'
+                };
+                
+                document.title = `Kelas IX C - ${titles[pageId] || 'Home'} | SMP Negeri 1 Panggang`;
+            }
+            
+            updateActiveNavLink(pageId) {
+                const navLinks = document.querySelectorAll('.nav-link');
+                navLinks.forEach(link => {
+                    const linkPage = link.getAttribute('data-page');
+                    if (linkPage === pageId) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
+            }
+            
+            setupMusicPlayer() {
+                this.music = document.getElementById('backgroundMusic');
+                const toggleBtn = document.getElementById('musicToggle');
+                const playIcon = toggleBtn.querySelector('i');
+                
+                // Set volume to 30% by default
+                this.music.volume = 0.3;
+                
+                toggleBtn.addEventListener('click', () => {
+                    if (this.isPlaying) {
+                        this.music.pause();
+                        playIcon.className = 'fas fa-play';
+                        toggleBtn.classList.add('paused');
+                    } else {
+                        this.music.play().catch(e => {
+                            console.log("Autoplay prevented. User interaction required.");
+                            toggleBtn.classList.add('paused');
+                        });
+                        playIcon.className = 'fas fa-pause';
+                        toggleBtn.classList.remove('paused');
+                    }
+                    this.isPlaying = !this.isPlaying;
+                });
+                
+                // Auto-play after user interaction
+                document.addEventListener('click', () => {
+                    if (!this.music.played.length) {
+                        this.music.play().then(() => {
+                            this.music.pause();
+                            this.isPlaying = false;
+                            playIcon.className = 'fas fa-play';
+                            toggleBtn.classList.add('paused');
+                        }).catch(e => {
+                            // User hasn't interacted yet
+                        });
+                    }
+                }, { once: true });
+            }
+            
+            setupSearchFunctionality() {
+                const searchInput = document.getElementById('searchAnggota');
+                if (!searchInput) return;
+                
+                searchInput.addEventListener('input', (e) => {
+                    this.searchAnggota(e.target.value);
+                });
+            }
+            
+            searchAnggota(query) {
+                const memberCards = document.querySelectorAll('.member-card');
+                const queryLower = query.toLowerCase().trim();
+                
+                memberCards.forEach(card => {
+                    const memberName = card.querySelector('.member-name').textContent.toLowerCase();
+                    
+                    if (queryLower === '' || memberName.includes(queryLower)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            }
+            
+            setupGallery() {
+                const galleryItems = document.querySelectorAll('.gallery-item');
+                const modal = document.getElementById('galleryModal');
+                const modalImage = document.getElementById('modalImage');
+                const closeModal = document.querySelector('.close-modal');
+                
+                galleryItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        const img = item.querySelector('img');
+                        modalImage.src = img.src;
+                        modalImage.alt = img.alt;
+                        modal.style.display = 'flex';
+                        document.body.style.overflow = 'hidden';
+                    });
+                    
+                    item.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            item.click();
+                        }
+                    });
+                });
+                
+                closeModal.addEventListener('click', () => {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                });
+                
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape' && modal.style.display === 'flex') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+                
+                this.setupLazyLoading();
+            }
+            
+            setupLazyLoading() {
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            if (img.dataset.src) {
+                                img.src = img.dataset.src;
+                                img.removeAttribute('data-src');
+                            }
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.gallery-item img').forEach(img => {
+                    const originalSrc = img.src;
+                    img.dataset.src = originalSrc;
+                    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"%3E%3Crect width="600" height="400" fill="%231a1a2e"/%3E%3Ctext x="50%" y="50%" font-family="Arial" font-size="20" fill="%2300d4ff" text-anchor="middle" dy=".3em"%3ELoading...%3C/text%3E%3C/svg%3E';
+                    imageObserver.observe(img);
+                });
+            }
+            
+            setupScrollTop() {
+                const scrollTopBtn = document.getElementById('scrollTopBtn');
+                
+                window.addEventListener('scroll', () => {
+                    if (window.scrollY > 300) {
+                        scrollTopBtn.classList.add('show');
+                    } else {
+                        scrollTopBtn.classList.remove('show');
+                    }
+                });
+                
+                scrollTopBtn.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+            
+            setupTypingEffect() {
+                const typingElement = document.getElementById('typingElement');
+                if (!typingElement) return;
+                
+                const textArray = [
+                    '30 Anggota, 1 Keluarga',
+                    'Kelas Kreatif & Inovatif',
+                    'Solid dalam Kebersamaan',
+                    'Siap Mengukir Masa Depan',
+                    'Cerdas dan Berkarakter'
+                ];
+                
+                let currentIndex = 0;
+                let charIndex = 0;
+                let isDeleting = false;
+                let isCursorVisible = true;
+                
+                const typeEffect = () => {
+                    const currentText = textArray[currentIndex];
+                    
+                    if (isDeleting) {
+                        typingElement.textContent = currentText.substring(0, charIndex - 1);
+                        charIndex--;
+                    } else {
+                        typingElement.textContent = currentText.substring(0, charIndex + 1);
+                        charIndex++;
+                    }
+                    
+                    let typeSpeed = isDeleting ? 50 : 100;
+                    
+                    if (!isDeleting && charIndex === currentText.length) {
+                        typeSpeed = 2000;
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        currentIndex = (currentIndex + 1) % textArray.length;
+                        typeSpeed = 500;
+                    }
+                    
+                    // Add cursor
+                    if (!typingElement.querySelector('.cursor')) {
+                        const cursor = document.createElement('span');
+                        cursor.className = 'cursor';
+                        typingElement.appendChild(cursor);
+                    }
+                    
+                    // Blink cursor
+                    const cursor = typingElement.querySelector('.cursor');
+                    if (cursor) {
+                        isCursorVisible = !isCursorVisible;
+                        cursor.style.opacity = isCursorVisible ? '1' : '0';
+                    }
+                    
+                    setTimeout(typeEffect, typeSpeed);
+                };
+                
+                setTimeout(typeEffect, 1000);
+            }
+            
+            setupDeviceOptimizations() {
+                if (this.isIOS()) {
+                    this.applyIOSFixes();
+                }
+                
+                if (this.isAndroid()) {
+                    this.applyAndroidFixes();
+                }
+                
+                if (this.isTouchDevice()) {
+                    this.applyTouchOptimizations();
+                }
+            }
+            
+            isIOS() {
+                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            }
+            
+            isAndroid() {
+                return /Android/.test(navigator.userAgent);
+            }
+            
+            isTouchDevice() {
+                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            }
+            
+            applyIOSFixes() {
+                document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+                
+                document.addEventListener('touchstart', (e) => {
+                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                        document.body.style.zoom = '100%';
+                    }
+                });
+                
+                document.body.style.webkitOverflowScrolling = 'touch';
+            }
+            
+            applyAndroidFixes() {
+                window.addEventListener('resize', () => {
+                    if (document.activeElement.tagName === 'INPUT' || 
+                        document.activeElement.tagName === 'TEXTAREA') {
+                        window.scrollTo(0, 0);
+                    }
+                });
+            }
+            
+            applyTouchOptimizations() {
+                document.querySelectorAll('.neon-button, .nav-link, .gallery-item, .member-card').forEach(el => {
+                    el.addEventListener('touchstart', () => {
+                        el.classList.add('touch-active');
+                    });
+                    
+                    el.addEventListener('touchend', () => {
+                        setTimeout(() => {
+                            el.classList.remove('touch-active');
+                        }, 150);
+                    });
+                });
+                
+                document.addEventListener('touchstart', () => {}, { passive: true });
+            }
+        }
+        
+        // Initialize website
+        document.addEventListener('DOMContentLoaded', () => {
+            const website = new KelasIXCWebsite();
+            
+            // Handle initial page based on URL hash
+            const hash = window.location.hash.substring(1);
+            const validPages = ['home', 'anggota', 'pengurus', 'wali', 'galeri', 'jadwal', 'info'];
+            
+            if (hash && validPages.includes(hash)) {
+                website.navigateToPage(hash, false);
+            }
+            
+            // Make website globally available
+            window.kelasIXCWebsite = website;
+        });
+        
+        // Add touch styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .touch-active {
+                opacity: 0.8;
+                transform: scale(0.98);
+            }
+            
+            @media (max-width: 768px) {
+                .nav-link {
+                    min-height: 44px;
+                    min-width: 44px;
+                }
+                
+                .neon-button {
+                    min-height: 44px;
+                    min-width: 44px;
+                }
+                
+                .gallery-item, .member-card {
+                    cursor: pointer;
+                }
+            }
+            
+            * {
+                -webkit-tap-highlight-color: transparent;
+            }
+            
+            .page-container {
+                -webkit-overflow-scrolling: touch;
+            }
+            
+            .member-card {
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
