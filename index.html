@@ -2305,7 +2305,123 @@
                 font-size: 2.8rem;
             }
         }
-    </style>
+    .countdown-timer {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.countdown-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 70px;
+}
+
+.countdown-number {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    line-height: 1;
+    background: rgba(0, 212, 255, 0.1);
+    padding: 0.5rem;
+    border-radius: 10px;
+    min-width: 70px;
+    display: inline-block;
+    text-align: center;
+    border: 2px solid rgba(0, 212, 255, 0.3);
+}
+
+.countdown-label {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.home-description {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    line-height: 1.8;
+    max-width: 600px;
+}
+
+.class-motto {
+    position: relative;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    border-radius: 20px;
+    border: 1px solid rgba(0, 212, 255, 0.3);
+}
+
+/* Animasi untuk stat number */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.stat-number {
+    animation: countUp 1s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .countdown-timer {
+        gap: 1rem;
+    }
+    
+    .countdown-number {
+        font-size: 1.8rem;
+        min-width: 55px;
+        padding: 0.4rem;
+    }
+    
+    .countdown-item {
+        min-width: 55px;
+    }
+    
+    .home-description {
+        font-size: 1.1rem;
+    }
+    
+    .clock-display {
+        font-size: 1.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .countdown-timer {
+        gap: 0.5rem;
+    }
+    
+    .countdown-number {
+        font-size: 1.5rem;
+        min-width: 45px;
+        padding: 0.3rem;
+    }
+    
+    .countdown-item {
+        min-width: 45px;
+    }
+    
+    .countdown-label {
+        font-size: 0.7rem;
+    }
+    
+    .home-features {
+        justify-content: center;
+    }
+}
+</style>
 </head>
 <body>
     <!-- Loading Screen -->
@@ -2333,85 +2449,165 @@
         </div>
     </div>
     
-    <!-- Header -->
-    <header class="header">
-        <nav class="navbar">
-            <div class="nav-brand">
-                <i class="fas fa-school"></i>
-                <h1>Kelas IX C</h1>
-            </div>
-            <button class="hamburger" aria-label="Toggle navigation">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
-                <li><a href="#anggota" class="nav-link" data-page="anggota"><i class="fas fa-users"></i> 30 Anggota</a></li>
-                <li><a href="#pengurus" class="nav-link" data-page="pengurus"><i class="fas fa-user-tie"></i> Pengurus</a></li>
-                <li><a href="#wali" class="nav-link" data-page="wali"><i class="fas fa-chalkboard-teacher"></i> Wali Kelas</a></li>
-                <li><a href="#galeri" class="nav-link" data-page="galeri"><i class="fas fa-images"></i> Galeri</a></li>
-                <li><a href="#jadwal" class="nav-link" data-page="jadwal"><i class="fas fa-calendar-alt"></i> Jadwal</a></li>
-                <li><a href="#info" class="nav-link" data-page="info"><i class="fas fa-info-circle"></i> Info</a></li>
-            </ul>
-        </nav>
-    </header>
+   <!-- Header -->
+<header class="header">
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-school"></i>
+            <h1>Kelas IX C</h1>
+        </div>
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-menu">
+            <li><a href="javascript:void(0);" class="nav-link active" data-page="home"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="javascript:void(0);" class="nav-link" data-page="anggota"><i class="fas fa-users"></i> 30 Anggota</a></li>
+            <li><a href="javascript:void(0);" class="nav-link" data-page="pengurus"><i class="fas fa-user-tie"></i> Pengurus</a></li>
+            <li><a href="javascript:void(0);" class="nav-link" data-page="wali"><i class="fas fa-chalkboard-teacher"></i> Wali Kelas</a></li>
+            <li><a href="javascript:void(0);" class="nav-link" data-page="galeri"><i class="fas fa-images"></i> Galeri</a></li>
+            <li><a href="javascript:void(0);" class="nav-link" data-page="jadwal"><i class="fas fa-calendar-alt"></i> Jadwal</a></li>
+            <li><a href="javascript:void(0);" class="nav-link" data-page="info"><i class="fas fa-info-circle"></i> Info</a></li>
+        </ul>
+    </nav>
+</header>
     
     <!-- Pages -->
     <main>
         <!-- Home Page -->
-        <div id="home-page" class="page-container active">
-            <section class="home-page">
-                <div class="container">
-                    <div class="home-content">
-                        <div class="home-text">
-                            <h1>Selamat Datang di <span class="highlight">Kelas IX C</span></h1>
-                            <h2 class="typing-text" id="typingElement"></h2>
-                            <p>Kelas dengan 30 siswa berprestasi, kreatif, dan solidaritas tinggi. Mari kenali semua anggota kelas IX C SMP Negeri 1 Panggang!</p>
-                            
-                            <div class="stats-grid">
-                                <div class="stat-item modern-card">
-                                    <div class="stat-number">30</div>
-                                    <div class="stat-label">Total Anggota</div>
-                                </div>
-                                <div class="stat-item modern-card">
-                                    <div class="stat-number">14</div>
-                                    <div class="stat-label">Siswa Putra</div>
-                                </div>
-                                <div class="stat-item modern-card">
-                                    <div class="stat-number">16</div>
-                                    <div class="stat-label">Siswa Putri</div>
-                                </div>
+<div id="home-page" class="page-container active">
+    <section class="home-page">
+        <div class="container">
+            <div class="home-content">
+                <div class="home-text">
+                    <h1>Welcome To <span class="highlight">Kelas IX C</span></h1>
+                    <h2 class="typing-text" id="typingElement"></h2>
+                    <p class="home-description"></p>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-item modern-card">
+                            <div class="stat-number" id="count-total">30</div>
+                            <div class="stat-label">Total Anggota</div>
+                        </div>
+                        <div class="stat-item modern-card">
+                            <div class="stat-number">14</div>
+                            <div class="stat-label">Siswa Putra</div>
+                        </div>
+                        <div class="stat-item modern-card">
+                            <div class="stat-number">16</div>
+                            <div class="stat-label">Siswa Putri</div>
+                        </div>
+                    </div>
+                    
+                    <!-- UN Countdown -->
+                    <div class="countdown-container modern-card" style="margin: 2rem 0; padding: 1.5rem; text-align: center;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">
+                            <i class="fas fa-hourglass-half"></i> Countdown Menuju Ujian Nasional
+                        </h3>
+                        <div class="countdown-timer" id="unCountdown">
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="days">00</span>
+                                <span class="countdown-label">Hari</span>
                             </div>
-                            
-                            <div class="home-features">
-                                <span class="feature-tag"><i class="fas fa-star"></i> Berprestasi</span>
-                                <span class="feature-tag"><i class="fas fa-heart"></i> Solidaritas Tinggi</span>
-                                <span class="feature-tag"><i class="fas fa-lightbulb"></i> Kreatif & Inovatif</span>
-                                <span class="feature-tag"><i class="fas fa-trophy"></i> Juara Lomba</span>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="hours">00</span>
+                                <span class="countdown-label">Jam</span>
                             </div>
-                            
-                            <div class="home-buttons">
-                                <a href="#anggota" class="neon-button" data-page="anggota"><i class="fas fa-users"></i> Kenali 30 Anggota</a>
-                                <a href="#galeri" class="neon-button secondary-button" data-page="galeri"><i class="fas fa-images"></i> Jelajahi Galeri</a>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="minutes">00</span>
+                                <span class="countdown-label">Menit</span>
+                            </div>
+                            <div class="countdown-item">
+                                <span class="countdown-number" id="seconds">00</span>
+                                <span class="countdown-label">Detik</span>
                             </div>
                         </div>
-                        <div class="home-image">
-                            <div class="class-logo-container">
-                                <div class="class-logo-frame"></div>
-                                <div class="class-logo modern-card">
-                                    <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Logo Kelas IX C">
-                                    <h3>Kelas IX C</h3>
-                                    <p>SMP Negeri 1 Panggang</p>
-                                    <div class="member-count">30 Anggota</div>
-                                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #00d4ff;">Angkatan 2025/2026</p>
-                                </div>
+                        <p style="color: var(--text-muted); margin-top: 1rem; font-size: 0.9rem;">
+                            Target: Mei 2026
+                        </p>
+                    </div>
+                    
+                    <!-- Stats Tambahan -->
+                    <div class="stats-grid" style="margin: 2rem 0;">
+                        <div class="stat-item modern-card">
+                            <div class="stat-number">15+</div>
+                            <div class="stat-label">Prestasi</div>
+                        </div>
+                        <div class="stat-item modern-card">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Kegiatan</div>
+                        </div>
+                        <div class="stat-item modern-card">
+                            <div class="stat-number">100%</div>
+                            <div class="stat-label">Kehadiran</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Quote of the Day -->
+                    <div class="quote-container modern-card" style="margin: 2rem 0; padding: 1.5rem; border-left: 4px solid var(--primary-color);">
+                        <i class="fas fa-quote-left" style="color: var(--primary-color); font-size: 1.5rem; margin-right: 10px;"></i>
+                        <span id="dailyQuote" style="font-style: italic; color: var(--text-light);">
+                            "Bersama kita bisa, bersama kita kuat!"
+                        </span>
+                        <p style="text-align: right; margin-top: 0.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                            - Kelas IX C
+                        </p>
+                    </div>
+                    
+                    <div class="home-features">
+                        <span class="feature-tag"><i class="fas fa-star"></i> Berprestasi</span>
+                        <span class="feature-tag"><i class="fas fa-heart"></i> Solidaritas Tinggi</span>
+                        <span class="feature-tag"><i class="fas fa-lightbulb"></i> Kreatif & Inovatif</span>
+                        <span class="feature-tag"><i class="fas fa-trophy"></i> Juara Lomba</span>
+                        <span class="feature-tag"><i class="fas fa-music"></i> Seni & Budaya</span>
+                        <span class="feature-tag"><i class="fas fa-running"></i> Olahraga</span>
+                    </div>
+                    
+                    <!-- Live Clock -->
+                    <div class="live-clock modern-card" style="margin: 2rem 0; padding: 1.5rem; text-align: center;">
+                        <h4 style="color: var(--text-muted); margin-bottom: 0.5rem;">
+                            <i class="far fa-clock"></i> Waktu Sekarang
+                        </h4>
+                        <div class="clock-display" id="liveClock" style="font-size: 2rem; font-weight: bold; color: var(--primary-color);">
+                            00:00:00
+                        </div>
+                        <div class="date-display" id="currentDate" style="color: var(--text-muted); margin-top: 0.5rem;">
+                            Senin, 1 Januari 2025
+                        </div>
+                    </div>
+                    
+                    <div class="home-buttons">
+                        <a href="#anggota" class="neon-button" data-page="anggota"><i class="fas fa-users"></i> Kenali 30 Anggota</a>
+                        <a href="#galeri" class="neon-button secondary-button" data-page="galeri"><i class="fas fa-images"></i> Jelajahi Galeri</a>
+                        <a href="#jadwal" class="neon-button" data-page="jadwal" style="background: var(--gradient-secondary);"><i class="fas fa-calendar-alt"></i> Lihat Jadwal</a>
+                    </div>
+                </div>
+                <div class="home-image">
+                    <div class="class-logo-container">
+                        <div class="class-logo-frame"></div>
+                        <div class="class-logo modern-card">
+                            <!-- UPDATE: Ganti dengan foto kelas yang lebih baik -->
+                            <img src="https://files.catbox.moe/w8waor.jpg" alt="Foto IX C">
+                            <h3>Kelas IX C</h3>
+                            <p>SMP Negeri 1 Panggang</p>
+                            <div class="member-count">30 Anggota</div>
+                            <div class="class-motto" style="margin-top: 1rem; font-size: 0.9rem; color: var(--primary-color); font-style: italic;">
+                                "Bersatu dalam Prestasi"
                             </div>
+                            <p style="margin-top: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">Angkatan 2025/2026</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
+    </section>
+</div>
+
+
+
+
+
         
         <!-- Anggota Page -->
         <div id="anggota-page" class="page-container">
@@ -2419,7 +2615,7 @@
                 <div class="container">
                     <div class="section-title">
                         <h2><i class="fas fa-users"></i> 30 Anggota Kelas</h2>
-                        <p>Kenali semua 30 Anggota kelas IX C yang penuh bakat dan kreativitas</p>
+                        <p>Kenali semua 30 Anggota kelas IX C yang penuh bakat dan keunikan</p>
                     </div>
                     
                     <div class="anggota-header">
@@ -2445,16 +2641,16 @@
                     </div>
                     
                     <div class="member-grid">
-                        <!-- Anggota 1-4 (Pengurus Utama) -->
+                        <!-- Anggota 1 - 6(Pengurus Utama) -->
                         <div class="member-card modern-card">
                             <div class="member-badge">
                                 <i class="fas fa-crown"></i>
                             </div>
                             <div class="member-photo-container">
                                 <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Budi Santoso" class="member-photo">
+                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Alifia Cantika" class="member-photo">
                             </div>
-                            <h3 class="member-name">Budi Santoso</h3>
+                            <h3 class="member-name">Alifia Cantika</h3>
                             <div class="member-role">Ketua Kelas</div>
                             <div class="member-info">
                                 <div class="info-item">
@@ -2478,9 +2674,9 @@
                             </div>
                             <div class="member-photo-container">
                                 <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Maya Sari" class="member-photo">
+                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Priwanuky Zhilan Saifi" class="member-photo">
                             </div>
-                            <h3 class="member-name">Maya Sari</h3>
+                            <h3 class="member-name">Priwanuky Zhilan Saifi</h3>
                             <div class="member-role">Wakil Ketua</div>
                             <div class="member-info">
                                 <div class="info-item">
@@ -2504,9 +2700,9 @@
                             </div>
                             <div class="member-photo-container">
                                 <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Fajar Nugroho" class="member-photo">
+                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="assyifa kheina ramadhani" class="member-photo">
                             </div>
-                            <h3 class="member-name">Fajar Nugroho</h3>
+                            <h3 class="member-name">Assyifa Kheina Ramadhani</h3>
                             <div class="member-role">Sekretaris</div>
                             <div class="member-info">
                                 <div class="info-item">
@@ -2530,10 +2726,10 @@
                             </div>
                             <div class="member-photo-container">
                                 <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Citra Lestari" class="member-photo">
+                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="nuraida ulya shabrina" class="member-photo">
                             </div>
-                            <h3 class="member-name">Citra Lestari</h3>
-                            <div class="member-role">Bendahara</div>
+                            <h3 class="member-name">Nuraida Ulya Shabrinai</h3>
+                            <div class="member-role">Bendahara2</div>
                             <div class="member-info">
                                 <div class="info-item">
                                     <i class="fas fa-graduation-cap"></i>
@@ -2549,102 +2745,614 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Anggota 5-30 (Siswa Biasa) -->
-                        <!-- Saya akan menampilkan beberapa contoh saja untuk menghemat ruang -->
-                        <div class="member-card modern-card">
-                            <div class="member-photo-container">
-                                <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Dewi Anggraini" class="member-photo">
-                            </div>
-                            <h3 class="member-name">Dewi Anggraini</h3>
-                            <div class="member-info">
-                                <div class="info-item">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <span><strong>Cita-cita:</strong> Guru</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-book"></i>
-                                    <span><strong>Hobi:</strong> Membaca</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-music"></i>
-                                    <span><strong>Bakat:</strong> Menyanyi</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="member-card modern-card">
-                            <div class="member-photo-container">
-                                <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Rizky Pratama" class="member-photo">
-                            </div>
-                            <h3 class="member-name">Rizky Pratama</h3>
-                            <div class="member-info">
-                                <div class="info-item">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <span><strong>Cita-cita:</strong> Programmer</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-code"></i>
-                                    <span><strong>Hobi:</strong> Coding</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-robot"></i>
-                                    <span><strong>Bakat:</strong> Robotika</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Tambahkan anggota lainnya sesuai kebutuhan -->
-                        <!-- Saya akan menambahkan beberapa contoh lagi -->
                         
                         <div class="member-card modern-card">
+                            <div class="member-badge">
+                                <i class="fas fa-star"></i>
+                            </div>
                             <div class="member-photo-container">
                                 <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Sari Utami" class="member-photo">
+                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="priandita khoirunisa" class="member-photo">
                             </div>
-                            <h3 class="member-name">Sari Utami</h3>
+                            <h3 class="member-name">Priandita Khoirunisa</h3>
+                            <div class="member-role">bendahara1</div>
                             <div class="member-info">
                                 <div class="info-item">
                                     <i class="fas fa-graduation-cap"></i>
-                                    <span><strong>Cita-cita:</strong> Perawat</span>
+                                    <span><strong>Cita-cita:</strong> Jurnalis</span>
                                 </div>
                                 <div class="info-item">
-                                    <i class="fas fa-heartbeat"></i>
-                                    <span><strong>Hobi:</strong> Olahraga</span>
+                                    <i class="fas fa-pen"></i>
+                                    <span><strong>Hobi:</strong> Menulis</span>
                                 </div>
                                 <div class="info-item">
-                                    <i class="fas fa-running"></i>
-                                    <span><strong>Bakat:</strong> Atletik</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="member-card modern-card">
-                            <div class="member-photo-container">
-                                <div class="member-photo-frame"></div>
-                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Andi Wijaya" class="member-photo">
-                            </div>
-                            <h3 class="member-name">Andi Wijaya</h3>
-                            <div class="member-info">
-                                <div class="info-item">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <span><strong>Cita-cita:</strong> Insinyur</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-cogs"></i>
-                                    <span><strong>Hobi:</strong> Robotika</span>
-                                </div>
-                                <div class="info-item">
-                                    <i class="fas fa-wrench"></i>
-                                    <span><strong>Bakat:</strong> Teknik</span>
+                                    <i class="fas fa-award"></i>
+                                    <span><strong>Prestasi:</strong> Juara Menulis Cerpen</span>
                                 </div>
                             </div>
                         </div>
                         
-                        <!-- Sisanya bisa ditambahkan dengan pola yang sama -->
-                    </div>
+                          <div class="member-card modern-card">
+                            <div class="member-badge">
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <div class="member-photo-container">
+                                <div class="member-photo-frame"></div>
+                                <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Muhammad Nur Fathin" class="member-photo">
+                            </div>
+                            <h3 class="member-name">Muhammad Nur Fathin</h3>
+                            <div class="member-role">devolper</div>
+                            <div class="member-info">
+                                <div class="info-item">
+                                    <i class="fas fa-graduation-cap"></i>
+                                    <span><strong>Cita-cita:</strong> investor</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-pen"></i>
+                                    <span><strong>Hobi:</strong>coding dan ml</span>
+                                </div>
+                                <div class="info-item">
+                                    <i class="fas fa-award"></i>
+                                    <span><strong>Prestasi:</strong> Juara Menulis Cerpen</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                       <!-- Lanjutan Anggota Kelas IX C -->
+<!-- Anggota 7-30 -->
+
+<!-- Anggota 7 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="ALYA NUR'AINI" class="member-photo">
+    </div>
+    <h3 class="member-name">ALYA NUR'AINI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Dokter</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-book"></i>
+            <span><strong>Hobi:</strong> Membaca</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-heart"></i>
+            <span><strong>Bakat:</strong> Menyanyi</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 8 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="ARLISTA NURROHMAN" class="member-photo">
+    </div>
+    <h3 class="member-name">ARLISTA NURROHMAN</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Guru</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-paint-brush"></i>
+            <span><strong>Hobi:</strong> Melukis</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-palette"></i>
+            <span><strong>Bakat:</strong> Seni Rupa</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 9 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="AULIA NOVITASARI" class="member-photo">
+    </div>
+    <h3 class="member-name">AULIA NOVITASARI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Arsitek</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-ruler-combined"></i>
+            <span><strong>Hobi:</strong> Desain</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-drafting-compass"></i>
+            <span><strong>Bakat:</strong> Menggambar Teknik</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 10 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="AZHAR ROUF MAULANA" class="member-photo">
+    </div>
+    <h3 class="member-name">AZHAR ROUF MAULANA</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Programmer</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-code"></i>
+            <span><strong>Hobi:</strong> Coding</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-gamepad"></i>
+            <span><strong>Bakat:</strong> Game Development</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 11 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="AZZAHRA OKTAVIANDA SETYANINGRUM" class="member-photo">
+    </div>
+    <h3 class="member-name">AZZAHRA OKTAVIANDA SETYANINGRUM</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Psikolog</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-brain"></i>
+            <span><strong>Hobi:</strong> Membaca Buku Psikologi</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-comments"></i>
+            <span><strong>Bakat:</strong> Konseling</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 12 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="BRIAN APRILLIO WILLIANDONO" class="member-photo">
+    </div>
+    <h3 class="member-name">BRIAN APRILLIO WILLIANDONO</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Insinyur</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-cogs"></i>
+            <span><strong>Hobi:</strong> Robotika</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-microchip"></i>
+            <span><strong>Bakat:</strong> Elektronika</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 13 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="CELSHY ARUM SARI" class="member-photo">
+    </div>
+    <h3 class="member-name">CELSHY ARUM SARI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Chef</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-utensils"></i>
+            <span><strong>Hobi:</strong> Memasak</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-cheese"></i>
+            <span><strong>Bakat:</strong> Kuliner</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 14 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="DEFRIKO AHMAD MAULANA" class="member-photo">
+    </div>
+    <h3 class="member-name">DEFRIKO AHMAD MAULANA</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Tentara</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-shield-alt"></i>
+            <span><strong>Hobi:</strong> Latihan Militer</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-running"></i>
+            <span><strong>Bakat:</strong> Atletik</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 15 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="DIGKI REFAN ARYANTO" class="member-photo">
+    </div>
+    <h3 class="member-name">DIGKI REFAN ARYANTO</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Youtuber</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-video"></i>
+            <span><strong>Hobi:</strong> Membuat Konten</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-camera"></i>
+            <span><strong>Bakat:</strong> Videografi</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 16 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="ERIN ABNASARI" class="member-photo">
+    </div>
+    <h3 class="member-name">ERIN ABNASARI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Jurnalis</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-newspaper"></i>
+            <span><strong>Hobi:</strong> Menulis Artikel</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-pen-fancy"></i>
+            <span><strong>Bakat:</strong> Menulis Cerita</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 17 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="FACHRA ALFIANA SULISTIYO" class="member-photo">
+    </div>
+    <h3 class="member-name">FACHRA ALFIANA SULISTIYO</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Pengusaha</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-chart-line"></i>
+            <span><strong>Hobi:</strong> Bisnis Online</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-lightbulb"></i>
+            <span><strong>Bakat:</strong> Kewirausahaan</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 18 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="FYOREL OKTO MARDHANI" class="member-photo">
+    </div>
+    <h3 class="member-name">FYOREL OKTO MARDHANI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Musisi</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-guitar"></i>
+            <span><strong>Hobi:</strong> Bermain Gitar</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-music"></i>
+            <span><strong>Bakat:</strong> Komposisi Musik</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 19 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="IZZATUR RAHMAN STONER" class="member-photo">
+    </div>
+    <h3 class="member-name">IZZATUR RAHMAN STONER</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Astronom</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-rocket"></i>
+            <span><strong>Hobi:</strong> Mengamati Bintang</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-satellite"></i>
+            <span><strong>Bakat:</strong> Ilmu Astronomi</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 20 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="KIRANA ALAYKA ALKALIFI PUTRI" class="member-photo">
+    </div>
+    <h3 class="member-name">KIRANA ALAYKA ALKALIFI PUTRI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Designer</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-palette"></i>
+            <span><strong>Hobi:</strong> Desain Grafis</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-tshirt"></i>
+            <span><strong>Bakat:</strong> Fashion Design</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 21 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="KRISTDANE ABIB DEXCO RAMADINATA" class="member-photo">
+    </div>
+    <h3 class="member-name">KRISTDANE ABIB DEXCO RAMADINATA</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Ilmuwan</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-flask"></i>
+            <span><strong>Hobi:</strong> Eksperimen Sains</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-atom"></i>
+            <span><strong>Bakat:</strong> Penelitian</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 22 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="OKTAVIANI" class="member-photo">
+    </div>
+    <h3 class="member-name">OKTAVIANI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Akuntan</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-calculator"></i>
+            <span><strong>Hobi:</strong> Matematika</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-chart-bar"></i>
+            <span><strong>Bakat:</strong> Analisis Data</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 23 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="RADITYA BAYU NURRAHMAN" class="member-photo">
+    </div>
+    <h3 class="member-name">RADITYA BAYU NURRAHMAN</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Atlet</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-basketball-ball"></i>
+            <span><strong>Hobi:</strong> Basket</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-trophy"></i>
+            <span><strong>Bakat:</strong> Olahraga</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 24 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="RINDA FANI NAFTALENA" class="member-photo">
+    </div>
+    <h3 class="member-name">RINDA FANI NAFTALENA</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Perawat</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-heartbeat"></i>
+            <span><strong>Hobi:</strong> Kesehatan</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-hand-holding-medical"></i>
+            <span><strong>Bakat:</strong> Merawat Orang</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 25 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="SELFI FEBRIANI" class="member-photo">
+    </div>
+    <h3 class="member-name">SELFI FEBRIANI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Dokter Hewan</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-paw"></i>
+            <span><strong>Hobi:</strong> Merawat Hewan</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-dog"></i>
+            <span><strong>Bakat:</strong> Kedokteran Hewan</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 26 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="TITO FANDY NUGROHO" class="member-photo">
+    </div>
+    <h3 class="member-name">TITO FANDY NUGROHO</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Pilot</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-plane"></i>
+            <span><strong>Hobi:</strong> Simulator Penerbangan</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-satellite-dish"></i>
+            <span><strong>Bakat:</strong> Navigasi</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 27 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="TRIATMOKO" class="member-photo">
+    </div>
+    <h3 class="member-name">TRIATMOKO</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Polisi</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-shield-alt"></i>
+            <span><strong>Hobi:</strong> Beladiri</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-balance-scale"></i>
+            <span><strong>Bakat:</strong> Hukum</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 28 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="TRISKA RAHMA SOLIKHA" class="member-photo">
+    </div>
+    <h3 class="member-name">TRISKA RAHMA SOLIKHA</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Penulis</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-pen"></i>
+            <span><strong>Hobi:</strong> Menulis Puisi</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-book-open"></i>
+            <span><strong>Bakat:</strong> Sastra</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 29 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="YASINTA DEWI SITA" class="member-photo">
+    </div>
+    <h3 class="member-name">YASINTA DEWI SITA</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Diplomat</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-globe"></i>
+            <span><strong>Hobi:</strong> Bahasa Asing</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-handshake"></i>
+            <span><strong>Bakat:</strong> Negosiasi</span>
+        </div>
+    </div>
+</div>
+
+<!-- Anggota 30 -->
+<div class="member-card modern-card">
+    <div class="member-photo-container">
+        <div class="member-photo-frame"></div>
+        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="YUNIATI" class="member-photo">
+    </div>
+    <h3 class="member-name">YUNIATI</h3>
+    <div class="member-info">
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Cita-cita:</strong> Dosen</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-chalkboard-teacher"></i>
+            <span><strong>Hobi:</strong> Mengajar</span>
+        </div>
+        <div class="info-item">
+            <i class="fas fa-graduation-cap"></i>
+            <span><strong>Bakat:</strong> Pendidikan</span>
+        </div>
+    </div>
+</div>
+
                     
                     <div style="text-align: center; margin-top: 3rem;">
                         <p style="color: var(--text-muted); font-size: 1.1rem;">Menampilkan 8 dari 30 anggota. Gunakan fitur pencarian untuk menemukan anggota lainnya.</p>
@@ -2677,9 +3385,9 @@
                                     </div>
                                     <div class="member-photo-container">
                                         <div class="member-photo-frame"></div>
-                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Budi Santoso" class="member-photo">
+                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="alifia cantika" class="member-photo">
                                     </div>
-                                    <h3 class="member-name">Budi Santoso</h3>
+                                    <h3 class="member-name">alifia cantika</h3>
                                     <div class="member-role">Ketua Kelas</div>
                                     <div class="member-info">
                                         <div class="info-item">
@@ -2699,9 +3407,9 @@
                                     </div>
                                     <div class="member-photo-container">
                                         <div class="member-photo-frame"></div>
-                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Maya Sari" class="member-photo">
+                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="priwanuky zhilan saifi" class="member-photo">
                                     </div>
-                                    <h3 class="member-name">Maya Sari</h3>
+                                    <h3 class="member-name">priwanuky zhilan saifi</h3>
                                     <div class="member-role">Wakil Ketua</div>
                                     <div class="member-info">
                                         <div class="info-item">
@@ -2718,7 +3426,7 @@
                         </div>
                         
                         <div class="structure-level">
-                            <div class="structure-title">Sekretaris & Bendahara</div>
+                            <div class="structure-title">Bendahara1, Bendahara2 & Sekretaris</div>
                             <div class="member-grid">
                                 <div class="member-card modern-card">
                                     <div class="member-badge">
@@ -2726,9 +3434,9 @@
                                     </div>
                                     <div class="member-photo-container">
                                         <div class="member-photo-frame"></div>
-                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Fajar Nugroho" class="member-photo">
+                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Assyifa Kheina Ramadhani" class="member-photo">
                                     </div>
-                                    <h3 class="member-name">Fajar Nugroho</h3>
+                                    <h3 class="member-name">Assyifa Kheina Ramadhani</h3>
                                     <div class="member-role">Sekretaris</div>
                                     <div class="member-info">
                                         <div class="info-item">
@@ -2748,10 +3456,10 @@
                                     </div>
                                     <div class="member-photo-container">
                                         <div class="member-photo-frame"></div>
-                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Citra Lestari" class="member-photo">
+                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Nuraida Ulya Shabrina" class="member-photo">
                                     </div>
-                                    <h3 class="member-name">Citra Lestari</h3>
-                                    <div class="member-role">Bendahara</div>
+                                    <h3 class="member-name">Nuraida Ulya Shabrina</h3>
+                                    <div class="member-role">Bendahara2</div>
                                     <div class="member-info">
                                         <div class="info-item">
                                             <i class="fas fa-tasks"></i>
@@ -2763,6 +3471,56 @@
                                         </div>
                                     </div>
                                 </div>
+                               <div class="member-card modern-card">
+                                    <div class="member-badge">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="member-photo-container">
+                                        <div class="member-photo-frame"></div>
+                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Priandita Khoirunisa" class="member-photo">
+                                    </div>
+                                    <h3 class="member-name">Priandita Khoirunisa</h3>
+                                    <div class="member-role">Bendahara1</div>
+                                    <div class="member-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-tasks"></i>
+                                            <span><strong>Tugas:</strong> Kelola keuangan kelas</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-award"></i>
+                                            <span><strong>Prestasi:</strong> Juara OSN Ekonomi</span>
+                                        </div>
+                                    </div>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="structure-level">
+                            <div class="structure-title">Devloper / Pengembang Website & Teknologi</div>
+                            <div class="member-grid">
+                                <div class="member-card modern-card">
+                                    <div class="member-badge">
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <div class="member-photo-container">
+                                        <div class="member-photo-frame"></div>
+                                        <img src="https://files.catbox.moe/7q0fwf.jpg" alt="Muhammad Nur Fathin" class="member-photo">
+                                    </div>
+                                    <h3 class="member-name">Muhammad Nur Fathin</h3>
+                                    <div class="member-role">developer</div>
+                                    <div class="member-info">
+                                        <div class="info-item">
+                                            <i class="fas fa-tasks"></i>
+                                            <span><strong>Tugas:</strong>mencari/membuat informasi digital seputar kelas</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <i class="fas fa-award"></i>
+                                            <span><strong>Prestasi:</strong> Bisa membuat website & apk </span>
+                                        </div>
+                                    </div>
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -3013,49 +3771,49 @@
                     </div>
                     
                     <div id="piket-tab" class="schedule-table-container">
-                        <h3 class="schedule-table-title"><i class="fas fa-broom"></i> Jadwal Piket 30 Anggota</h3>
-                        <table class="schedule-table modern-card">
-                            <thead>
-                                <tr>
-                                    <th>Hari</th>
-                                    <th>Tim Piket</th>
-                                    <th>Anggota (5 orang/hari)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="current-day">Senin</td>
-                                    <td>Tim A</td>
-                                    <td>Budi, Maya, Fajar, Citra, Dewi</td>
-                                </tr>
-                                <tr>
-                                    <td>Selasa</td>
-                                    <td>Tim B</td>
-                                    <td>Rizky, Sari, Andi, Nina, Rudi</td>
-                                </tr>
-                                <tr>
-                                    <td>Rabu</td>
-                                    <td>Tim C</td>
-                                    <td>Lisa, Bambang, Rina, Toni, Mega</td>
-                                </tr>
-                                <tr>
-                                    <td>Kamis</td>
-                                    <td>Tim D</td>
-                                    <td>Dodi, Putri, Eko, Wulan, Hadi</td>
-                                </tr>
-                                <tr>
-                                    <td>Jumat</td>
-                                    <td>Tim E</td>
-                                    <td>Siska, Joko, Ani, Bagus, Lina</td>
-                                </tr>
-                                <tr>
-                                    <td>Sabtu</td>
-                                    <td>Tim F</td>
-                                    <td>Rizki, Diana, Firman, Gita, Hendra</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+    <h3 class="schedule-table-title"><i class="fas fa-broom"></i> Jadwal Piket 30 Anggota</h3>
+    <table class="schedule-table modern-card">
+        <thead>
+            <tr>
+                <th>Hari</th>
+                <th>Tim Piket</th>
+                <th>Anggota (5 orang/hari)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="current-day">Senin</td>
+                <td>Tim A</td>
+                <td>ALYA NUR'AINI, ARLISTA NURROHMAN, AULIA NOVITASARI, AZHAR ROUF MAULANA, AZZAHRA OKTAVIANDA</td>
+            </tr>
+            <tr>
+                <td>Selasa</td>
+                <td>Tim B</td>
+                <td>BRIAN APRILLIO, CELSHY ARUM SARI, DEFRIKO AHMAD, DIGKI REFAN, ERIN ABNASARI</td>
+            </tr>
+            <tr>
+                <td>Rabu</td>
+                <td>Tim C</td>
+                <td>FACHRA ALFIANA, FYOREL OKTO, IZZATUR RAHMAN, KIRANA ALAYKA, KRISTDANE ABIB</td>
+            </tr>
+            <tr>
+                <td>Kamis</td>
+                <td>Tim D</td>
+                <td>OKTAVIANI, RADITYA BAYU, RINDA FANI, SELFI FEBRIANI, TITO FANDY</td>
+            </tr>
+            <tr>
+                <td>Jumat</td>
+                <td>Tim E</td>
+                <td>TRIATMOKO, TRISKA RAHMA, YASINTA DEWI, YUNIATI, PRIANDITA KHOIRUNISA</td>
+            </tr>
+            <tr>
+                <td>Sabtu</td>
+                <td>Tim F</td>
+                <td>ASSYIFA KHEINA, PRIWANUKY ZHILAN, ALIFIA CANTIKA, NURAIDA ULYA, MUHAMMAD NUR FATHIN</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 
                     <div id="pelajaran-tab" class="schedule-table-container" style="display: none;">
                         <h3 class="schedule-table-title"><i class="fas fa-book-open"></i> Jadwal Pelajaran</h3>
@@ -3169,11 +3927,11 @@
                     
                     <div class="class-info">
                         <div class="info-box modern-card">
-                            <h3><i class="fas fa-school"></i> Deskripsi Kelas</h3>
-                            <p>Kelas IX C adalah kelas dengan 30 siswa berprestasi di SMP Negeri 1 Panggang. Terdiri dari siswa-siswa yang memiliki semangat belajar tinggi dan aktif dalam berbagai kegiatan sekolah.</p>
+                            <h3><i class="fas fa-school"></i> Kata kata Kelas</h3>
+                            <p>Tidak perlu berjuang jika tidak di hargai melainkan membuktikan, perpisahan bukan berarti tidak akan bertemu lagi melaikan di kemudian hari</p>
                             <p><strong>Total Anggota:</strong> 30 siswa (14 putra, 16 putri)</p>
                             <p><strong>Wali Kelas:</strong> Dr. Agus Setiawan, M.Pd.</p>
-                            <p><strong>Visi Kelas:</strong> "Menjadi kelas berprestasi yang berkarakter dan berkontribusi untuk masyarakat"</p>
+                            <p><strong>Visi Kelas:</strong> "Menjadi kelas  yang berkarakter dan berkontribusi untuk masyarakat"</p>
                             <p><strong>Misi Kelas:</strong></p>
                             <ul>
                                 <li>Mencapai nilai UN tertinggi se-kota</li>
@@ -3254,7 +4012,7 @@
                 <p>30 Anggota | Angkatan 2025/2026 - Bersatu dalam Prestasi, Solid dalam Kebersamaan</p>
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                    <a href="https://www.tiktok.com/@_spensaga9c"><i class="fab fa-tiktok"></i></a>
                     <a href="#"><i class="fab fa-youtube"></i></a>
                     <a href="#"><i class="fab fa-facebook"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -3294,632 +4052,707 @@
         Browser Anda tidak mendukung elemen audio.
     </audio>
     
-    <!-- JavaScript -->
-    <script>
-        'use strict';
+   <script>
+    'use strict';
+    
+    class KelasIXCWebsite {
+        constructor() {
+            this.currentPage = 'home';
+            this.isPlaying = false;
+            this.music = null;
+            this.countdownInterval = null;
+            this.clockInterval = null;
+            this.quoteInterval = null;
+            this.homeFeatures = {
+                typingTexts: [
+                    '30 Anggota, 1 Keluarga',
+                    'Kelas Berprestasi & Berkarakter',
+                    'Siap Menghadapi Masa Depan',
+                    'Solid dalam Kebersamaan',
+                    'Cerdas, Kreatif, dan Inovatif',
+                    'Keluarga Besar IX C'
+                ],
+                dailyQuotes: [
+                    "Bersama kita bisa, bersama kita kuat!",
+                    "Prestasi bukan tujuan, tapi hasil dari proses yang konsisten.",
+                    "Kita bukan sekadar teman sekelas, tapi keluarga yang saling mendukung.",
+                    "Masa depan dimulai dari hari ini. Mari belajar bersama!",
+                    "Keberhasilan adalah ketika kita bisa bangkit dari kegagalan.",
+                    "Kita adalah generasi penerus bangsa. Mari buktikan!",
+                    "Kebersamaan adalah kekuatan terbesar kita.",
+                    "Setiap anggota memiliki keunikan yang membuat kelas ini spesial."
+                ]
+            };
+            this.init();
+        }
         
-        class KelasIXCWebsite {
-            constructor() {
-                this.currentPage = 'home';
-                this.isPlaying = false;
-                this.music = null;
-                this.init();
-            }
+        init() {
+            this.setupLoadingScreen();
+            this.setupNavigation();
+            this.setupGallery();
+            this.setupScrollTop();
+            this.setupTypingEffect();
+            this.setupMusicPlayer();
+            this.setupSearchFunctionality();
+            this.setupDeviceOptimizations();
+            this.setupHeaderScroll();
+            this.setupTabs();
+            this.setupGalleryFilter();
+            this.setupHomeFeatures();
+            this.setupParticles();
+        }
+        
+        setupLoadingScreen() {
+            const loadingScreen = document.querySelector('.loading-screen');
+            const loadingBar = document.querySelector('.loading-bar');
             
-            init() {
-                this.setupLoadingScreen();
-                this.setupNavigation();
-                this.setupGallery();
-                this.setupScrollTop();
-                this.setupTypingEffect();
-                this.setupMusicPlayer();
-                this.setupSearchFunctionality();
-                this.setupDeviceOptimizations();
-                this.setupHeaderScroll();
-                this.setupTabs();
-                this.setupGalleryFilter();
-            }
-            
-            setupLoadingScreen() {
-                const loadingScreen = document.querySelector('.loading-screen');
-                const loadingBar = document.querySelector('.loading-bar');
-                
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += Math.random() * 15 + 5;
-                    if (progress >= 100) {
-                        progress = 100;
-                        clearInterval(interval);
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 15 + 5;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        loadingScreen.classList.add('hidden');
                         setTimeout(() => {
-                            loadingScreen.classList.add('hidden');
-                            setTimeout(() => {
-                                loadingScreen.style.display = 'none';
-                            }, 800);
-                        }, 500);
-                    }
-                    loadingBar.style.width = `${progress}%`;
-                }, 200);
+                            loadingScreen.style.display = 'none';
+                            this.onPageLoaded();
+                        }, 800);
+                    }, 500);
+                }
+                loadingBar.style.width = `${progress}%`;
+            }, 200);
+        }
+        
+        onPageLoaded() {
+            // Start home features when page is loaded
+            if (this.currentPage === 'home') {
+                this.startHomeFeatures();
             }
-            
-            setupHeaderScroll() {
-                const header = document.querySelector('.header');
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 50) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                });
+        }
+        
+        setupHomeFeatures() {
+            // Pre-create elements needed for home features
+            this.createHomeFeatureElements();
+        }
+        
+        createHomeFeatureElements() {
+            // This ensures all home feature elements exist
+            const countdownContainer = document.getElementById('unCountdown');
+            if (!countdownContainer) {
+                console.warn('Countdown container not found');
             }
+        }
+        
+        startHomeFeatures() {
+            this.startCountdown();
+            this.startLiveClock();
+            this.startDailyQuotes();
+            this.animateStats();
+        }
+        
+        stopHomeFeatures() {
+            // Clear all intervals when leaving home page
+            if (this.countdownInterval) clearInterval(this.countdownInterval);
+            if (this.clockInterval) clearInterval(this.clockInterval);
+            if (this.quoteInterval) clearInterval(this.quoteInterval);
+        }
+        
+        startCountdown() {
+            const targetDate = new Date('May 1, 2026 08:00:00').getTime();
             
-            setupNavigation() {
-                const hamburger = document.querySelector('.hamburger');
-                const navMenu = document.querySelector('.nav-menu');
-                const navLinks = document.querySelectorAll('.nav-link');
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const timeLeft = targetDate - now;
                 
-                hamburger.addEventListener('click', () => {
-                    hamburger.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                    document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
-                });
+                const daysElement = document.getElementById('days');
+                const hoursElement = document.getElementById('hours');
+                const minutesElement = document.getElementById('minutes');
+                const secondsElement = document.getElementById('seconds');
+                const countdownContainer = document.getElementById('unCountdown');
                 
-                document.addEventListener('click', (e) => {
-                    if (window.innerWidth <= 768 && 
-                        !hamburger.contains(e.target) && 
-                        !navMenu.contains(e.target) && 
-                        navMenu.classList.contains('active')) {
+                if (!daysElement || !countdownContainer) return;
+                
+                if (timeLeft > 0) {
+                    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                    
+                    if (daysElement) daysElement.textContent = days.toString().padStart(2, '0');
+                    if (hoursElement) hoursElement.textContent = hours.toString().padStart(2, '0');
+                    if (minutesElement) minutesElement.textContent = minutes.toString().padStart(2, '0');
+                    if (secondsElement) secondsElement.textContent = seconds.toString().padStart(2, '0');
+                } else {
+                    countdownContainer.innerHTML = 
+                        '<div style="color: var(--success-color); font-size: 1.5rem; font-weight: bold;">🎉 UJIAN TELAH SELESAI! 🎉</div>';
+                    clearInterval(this.countdownInterval);
+                }
+            };
+            
+            // Initial update
+            updateCountdown();
+            
+            // Update every second
+            this.countdownInterval = setInterval(updateCountdown, 1000);
+        }
+        
+        startLiveClock() {
+            const updateClock = () => {
+                const now = new Date();
+                
+                // Format time
+                const hours = now.getHours().toString().padStart(2, '0');
+                const minutes = now.getMinutes().toString().padStart(2, '0');
+                const seconds = now.getSeconds().toString().padStart(2, '0');
+                
+                const clockElement = document.getElementById('liveClock');
+                const dateElement = document.getElementById('currentDate');
+                
+                if (clockElement) {
+                    clockElement.textContent = `${hours}:${minutes}:${seconds}`;
+                }
+                
+                if (dateElement) {
+                    const days = ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'];
+                    const months = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+                                   'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
+                    
+                    const dayName = days[now.getDay()];
+                    const date = now.getDate();
+                    const monthName = months[now.getMonth()];
+                    const year = now.getFullYear();
+                    
+                    dateElement.textContent = `${dayName}, ${date} ${monthName} ${year}`;
+                }
+            };
+            
+            // Initial update
+            updateClock();
+            
+            // Update every second
+            this.clockInterval = setInterval(updateClock, 1000);
+        }
+        
+        startDailyQuotes() {
+            const updateQuote = () => {
+                const quoteElement = document.getElementById('dailyQuote');
+                if (quoteElement) {
+                    const randomIndex = Math.floor(Math.random() * this.homeFeatures.dailyQuotes.length);
+                    quoteElement.textContent = `"${this.homeFeatures.dailyQuotes[randomIndex]}"`;
+                }
+            };
+            
+            // Initial update
+            updateQuote();
+            
+            // Update every 30 seconds
+            this.quoteInterval = setInterval(updateQuote, 30000);
+        }
+        
+        animateStats() {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.textContent);
+                if (isNaN(target)) return;
+                
+                let current = 0;
+                const increment = target / 50;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current).toString();
+                }, 30);
+            });
+        }
+        
+        setupHeaderScroll() {
+            const header = document.querySelector('.header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+        }
+        
+        setupNavigation() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            hamburger.addEventListener('click', () => {
+                hamburger.classList.toggle('active');
+                navMenu.classList.toggle('active');
+                document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth <= 768 && 
+                    !hamburger.contains(e.target) && 
+                    !navMenu.contains(e.target) && 
+                    navMenu.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page');
+                    
+                    if (pageId && pageId !== this.currentPage) {
+                        // Stop home features if leaving home page
+                        if (this.currentPage === 'home') {
+                            this.stopHomeFeatures();
+                        }
+                        
+                        this.navigateToPage(pageId);
+                        
+                        // Start home features if entering home page
+                        if (pageId === 'home') {
+                            setTimeout(() => this.startHomeFeatures(), 100);
+                        }
+                    }
+                    
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    link.classList.add('active');
+                    
+                    if (window.innerWidth <= 768) {
                         hamburger.classList.remove('active');
                         navMenu.classList.remove('active');
                         document.body.style.overflow = '';
                     }
                 });
-                
-                navLinks.forEach(link => {
-                    link.addEventListener('click', (e) => {
-                        e.preventDefault();
-                        const pageId = link.getAttribute('data-page');
-                        
-                        if (pageId && pageId !== this.currentPage) {
-                            this.navigateToPage(pageId);
-                        }
-                        
-                        navLinks.forEach(l => l.classList.remove('active'));
-                        link.classList.add('active');
-                        
-                        if (window.innerWidth <= 768) {
-                            hamburger.classList.remove('active');
-                            navMenu.classList.remove('active');
-                            document.body.style.overflow = '';
-                        }
-                    });
-                });
-                
-                window.addEventListener('popstate', (e) => {
-                    if (e.state && e.state.page) {
-                        this.navigateToPage(e.state.page, false);
-                    }
-                });
-            }
+            });
             
-            navigateToPage(pageId, updateHistory = true) {
-                const currentPage = document.querySelector(`#${this.currentPage}-page`);
-                if (currentPage) {
-                    currentPage.classList.remove('active');
-                    setTimeout(() => {
-                        currentPage.style.display = 'none';
-                    }, 300);
+            window.addEventListener('popstate', (e) => {
+                if (e.state && e.state.page) {
+                    this.navigateToPage(e.state.page, false);
                 }
-                
-                this.currentPage = pageId;
-                const newPage = document.querySelector(`#${pageId}-page`);
-                if (newPage) {
-                    newPage.style.display = 'block';
-                    setTimeout(() => {
-                        newPage.classList.add('active');
-                        window.scrollTo({
-                            top: 0,
-                            behavior: 'smooth'
-                        });
-                    }, 50);
-                }
-                
-                if (updateHistory) {
-                    window.history.pushState({ page: pageId }, '', `#${pageId}`);
-                }
-                
-                this.updatePageTitle(pageId);
-                this.updateActiveNavLink(pageId);
-                
-                // Reset tabs to default when changing pages
-                if (pageId === 'jadwal') {
-                    this.resetJadwalTabs();
-                }
+            });
+        }
+        
+        navigateToPage(pageId, updateHistory = true) {
+            const currentPage = document.querySelector(`#${this.currentPage}-page`);
+            if (currentPage) {
+                currentPage.classList.remove('active');
+                setTimeout(() => {
+                    currentPage.style.display = 'none';
+                }, 300);
             }
             
-            updatePageTitle(pageId) {
-                const titles = {
-                    'home': 'Home - Dashboard Kelas',
-                    'anggota': '30 Anggota Kelas',
-                    'pengurus': 'Pengurus Kelas',
-                    'wali': 'Wali Kelas',
-                    'galeri': 'Galeri Kelas',
-                    'jadwal': 'Jadwal Kelas',
-                    'info': 'Info Kelas'
-                };
-                
-                document.title = `Kelas IX C - ${titles[pageId] || 'Home'} | SMP Negeri 1 Panggang`;
-            }
-            
-            updateActiveNavLink(pageId) {
-                const navLinks = document.querySelectorAll('.nav-link');
-                navLinks.forEach(link => {
-                    const linkPage = link.getAttribute('data-page');
-                    if (linkPage === pageId) {
-                        link.classList.add('active');
-                    } else {
-                        link.classList.remove('active');
-                    }
-                });
-            }
-            
-            setupTabs() {
-                const jadwalTabs = document.querySelectorAll('.jadwal-tab');
-                jadwalTabs.forEach(tab => {
-                    tab.addEventListener('click', () => {
-                        const tabId = tab.getAttribute('data-tab');
-                        this.switchJadwalTab(tabId);
-                    });
-                });
-            }
-            
-            switchJadwalTab(tabId) {
-                // Update active tab
-                document.querySelectorAll('.jadwal-tab').forEach(tab => {
-                    tab.classList.remove('active');
-                });
-                document.querySelector(`.jadwal-tab[data-tab="${tabId}"]`).classList.add('active');
-                
-                // Show corresponding content
-                document.getElementById('piket-tab').style.display = 'none';
-                document.getElementById('pelajaran-tab').style.display = 'none';
-                document.getElementById('kegiatan-tab').style.display = 'none';
-                document.getElementById(`${tabId}-tab`).style.display = 'block';
-            }
-            
-            resetJadwalTabs() {
-                // Reset to first tab
-                this.switchJadwalTab('piket');
-            }
-            
-            setupGalleryFilter() {
-                const filterButtons = document.querySelectorAll('.filter-btn');
-                const galleryItems = document.querySelectorAll('.gallery-item');
-                
-                filterButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        // Update active button
-                        filterButtons.forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-                        
-                        const filterValue = button.getAttribute('data-filter');
-                        
-                        // Filter gallery items
-                        galleryItems.forEach(item => {
-                            const category = item.getAttribute('data-category');
-                            
-                            if (filterValue === 'all' || category === filterValue) {
-                                item.style.display = 'block';
-                                setTimeout(() => {
-                                    item.style.opacity = '1';
-                                    item.style.transform = 'translateY(0)';
-                                }, 10);
-                            } else {
-                                item.style.opacity = '0';
-                                item.style.transform = 'translateY(20px)';
-                                setTimeout(() => {
-                                    item.style.display = 'none';
-                                }, 300);
-                            }
-                        });
-                    });
-                });
-            }
-            
-            setupMusicPlayer() {
-                this.music = document.getElementById('backgroundMusic');
-                const toggleBtn = document.getElementById('musicToggle');
-                const playIcon = toggleBtn.querySelector('i');
-                
-                // Set volume to 30% by default
-                this.music.volume = 0.3;
-                
-                toggleBtn.addEventListener('click', () => {
-                    if (this.isPlaying) {
-                        this.music.pause();
-                        playIcon.className = 'fas fa-play';
-                        toggleBtn.classList.add('paused');
-                    } else {
-                        this.music.play().catch(e => {
-                            console.log("Autoplay prevented. User interaction required.");
-                            toggleBtn.classList.add('paused');
-                        });
-                        playIcon.className = 'fas fa-pause';
-                        toggleBtn.classList.remove('paused');
-                    }
-                    this.isPlaying = !this.isPlaying;
-                });
-                
-                // Auto-play after user interaction
-                document.addEventListener('click', () => {
-                    if (!this.music.played.length) {
-                        this.music.play().then(() => {
-                            this.music.pause();
-                            this.isPlaying = false;
-                            playIcon.className = 'fas fa-play';
-                            toggleBtn.classList.add('paused');
-                        }).catch(e => {
-                            // User hasn't interacted yet
-                        });
-                    }
-                }, { once: true });
-            }
-            
-            setupSearchFunctionality() {
-                const searchInput = document.getElementById('searchAnggota');
-                if (!searchInput) return;
-                
-                searchInput.addEventListener('input', (e) => {
-                    this.searchAnggota(e.target.value);
-                });
-            }
-            
-            searchAnggota(query) {
-                const memberCards = document.querySelectorAll('.member-card');
-                const queryLower = query.toLowerCase().trim();
-                
-                memberCards.forEach(card => {
-                    const memberName = card.querySelector('.member-name').textContent.toLowerCase();
-                    
-                    if (queryLower === '' || memberName.includes(queryLower)) {
-                        card.style.display = 'flex';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, 10);
-                    } else {
-                        card.style.opacity = '0';
-                        card.style.transform = 'translateY(20px)';
-                        setTimeout(() => {
-                            card.style.display = 'none';
-                        }, 300);
-                    }
-                });
-            }
-            
-            setupGallery() {
-                const galleryItems = document.querySelectorAll('.gallery-item');
-                const modal = document.getElementById('galleryModal');
-                const modalImage = document.getElementById('modalImage');
-                const modalTitle = document.getElementById('modalTitle');
-                const modalDescription = document.getElementById('modalDescription');
-                const modalDate = document.getElementById('modalDate');
-                const closeModal = document.querySelector('.close-modal');
-                
-                galleryItems.forEach(item => {
-                    item.addEventListener('click', () => {
-                        const img = item.querySelector('img');
-                        const caption = item.querySelector('.gallery-caption');
-                        const title = caption.querySelector('h4').textContent;
-                        const description = caption.querySelector('p').textContent;
-                        const date = caption.querySelector('.gallery-date span').textContent;
-                        
-                        modalImage.src = img.src;
-                        modalImage.alt = img.alt;
-                        modalTitle.textContent = title;
-                        modalDescription.textContent = description;
-                        modalDate.textContent = date;
-                        
-                        modal.classList.add('show');
-                        document.body.style.overflow = 'hidden';
-                    });
-                    
-                    item.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            item.click();
-                        }
-                    });
-                });
-                
-                closeModal.addEventListener('click', () => {
-                    modal.classList.remove('show');
-                    document.body.style.overflow = '';
-                });
-                
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        modal.classList.remove('show');
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                document.addEventListener('keydown', (e) => {
-                    if (e.key === 'Escape' && modal.classList.contains('show')) {
-                        modal.classList.remove('show');
-                        document.body.style.overflow = '';
-                    }
-                });
-                
-                this.setupLazyLoading();
-            }
-            
-            setupLazyLoading() {
-                const imageObserver = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const img = entry.target;
-                            if (img.dataset.src) {
-                                img.src = img.dataset.src;
-                                img.removeAttribute('data-src');
-                            }
-                            imageObserver.unobserve(img);
-                        }
-                    });
-                });
-                
-                document.querySelectorAll('.gallery-item img').forEach(img => {
-                    const originalSrc = img.src;
-                    img.dataset.src = originalSrc;
-                    img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"%3E%3Crect width="600" height="400" fill="%231a1a2e"/%3E%3Ctext x="50%" y="50%" font-family="Arial" font-size="20" fill="%2300d4ff" text-anchor="middle" dy=".3em"%3ELoading...%3C/text%3E%3C/svg%3E';
-                    imageObserver.observe(img);
-                });
-            }
-            
-            setupScrollTop() {
-                const scrollTopBtn = document.getElementById('scrollTopBtn');
-                
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 300) {
-                        scrollTopBtn.classList.add('show');
-                    } else {
-                        scrollTopBtn.classList.remove('show');
-                    }
-                });
-                
-                scrollTopBtn.addEventListener('click', () => {
+            this.currentPage = pageId;
+            const newPage = document.querySelector(`#${pageId}-page`);
+            if (newPage) {
+                newPage.style.display = 'block';
+                setTimeout(() => {
+                    newPage.classList.add('active');
                     window.scrollTo({
                         top: 0,
                         behavior: 'smooth'
                     });
-                });
+                }, 50);
             }
             
-            setupTypingEffect() {
-                const typingElement = document.getElementById('typingElement');
-                if (!typingElement) return;
-                
-                const textArray = [
-                    '30 Anggota, 1 Keluarga',
-                    'Kelas Kreatif & Inovatif',
-                    'Solid dalam Kebersamaan',
-                    'Siap Mengukir Masa Depan',
-                    'Cerdas dan Berkarakter'
-                ];
-                
-                let currentIndex = 0;
-                let charIndex = 0;
-                let isDeleting = false;
-                let isCursorVisible = true;
-                
-                const typeEffect = () => {
-                    const currentText = textArray[currentIndex];
-                    
-                    if (isDeleting) {
-                        typingElement.textContent = currentText.substring(0, charIndex - 1);
-                        charIndex--;
-                    } else {
-                        typingElement.textContent = currentText.substring(0, charIndex + 1);
-                        charIndex++;
-                    }
-                    
-                    let typeSpeed = isDeleting ? 50 : 100;
-                    
-                    if (!isDeleting && charIndex === currentText.length) {
-                        typeSpeed = 2000;
-                        isDeleting = true;
-                    } else if (isDeleting && charIndex === 0) {
-                        isDeleting = false;
-                        currentIndex = (currentIndex + 1) % textArray.length;
-                        typeSpeed = 500;
-                    }
-                    
-                    // Add cursor
-                    if (!typingElement.querySelector('.cursor')) {
-                        const cursor = document.createElement('span');
-                        cursor.className = 'cursor';
-                        typingElement.appendChild(cursor);
-                    }
-                    
-                    // Blink cursor
-                    const cursor = typingElement.querySelector('.cursor');
-                    if (cursor) {
-                        isCursorVisible = !isCursorVisible;
-                        cursor.style.opacity = isCursorVisible ? '1' : '0';
-                    }
-                    
-                    setTimeout(typeEffect, typeSpeed);
-                };
-                
-                setTimeout(typeEffect, 1000);
+            if (updateHistory) {
+                window.history.pushState({ page: pageId }, '', `#${pageId}`);
             }
             
-            setupDeviceOptimizations() {
-                if (this.isIOS()) {
-                    this.applyIOSFixes();
-                }
-                
-                if (this.isAndroid()) {
-                    this.applyAndroidFixes();
-                }
-                
-                if (this.isTouchDevice()) {
-                    this.applyTouchOptimizations();
-                }
-            }
+            this.updatePageTitle(pageId);
+            this.updateActiveNavLink(pageId);
             
-            isIOS() {
-                return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-            }
-            
-            isAndroid() {
-                return /Android/.test(navigator.userAgent);
-            }
-            
-            isTouchDevice() {
-                return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-            }
-            
-            applyIOSFixes() {
-                document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
-                
-                document.addEventListener('touchstart', (e) => {
-                    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
-                        document.body.style.zoom = '100%';
-                    }
-                });
-                
-                document.body.style.webkitOverflowScrolling = 'touch';
-            }
-            
-            applyAndroidFixes() {
-                window.addEventListener('resize', () => {
-                    if (document.activeElement.tagName === 'INPUT' || 
-                        document.activeElement.tagName === 'TEXTAREA') {
-                        window.scrollTo(0, 0);
-                    }
-                });
-            }
-            
-            applyTouchOptimizations() {
-                document.querySelectorAll('.neon-button, .nav-link, .gallery-item, .member-card').forEach(el => {
-                    el.addEventListener('touchstart', () => {
-                        el.classList.add('touch-active');
-                    });
-                    
-                    el.addEventListener('touchend', () => {
-                        setTimeout(() => {
-                            el.classList.remove('touch-active');
-                        }, 150);
-                    });
-                });
-                
-                document.addEventListener('touchstart', () => {}, { passive: true });
+            // Reset tabs to default when changing pages
+            if (pageId === 'jadwal') {
+                this.resetJadwalTabs();
             }
         }
         
-        // Initialize website
-        document.addEventListener('DOMContentLoaded', () => {
-            const website = new KelasIXCWebsite();
+        updatePageTitle(pageId) {
+            const titles = {
+                'home': 'Home - Dashboard Kelas',
+                'anggota': '30 Anggota Kelas',
+                'pengurus': 'Pengurus Kelas',
+                'wali': 'Wali Kelas',
+                'galeri': 'Galeri Kelas',
+                'jadwal': 'Jadwal Kelas',
+                'info': 'Info Kelas'
+            };
             
-            // Handle initial page based on URL hash
-            const hash = window.location.hash.substring(1);
-            const validPages = ['home', 'anggota', 'pengurus', 'wali', 'galeri', 'jadwal', 'info'];
-            
-            if (hash && validPages.includes(hash)) {
-                website.navigateToPage(hash, false);
-            }
-            
-            // Make website globally available
-            window.kelasIXCWebsite = website;
-        });
+            document.title = `Kelas IX C - ${titles[pageId] || 'Home'} | SMP Negeri 1 Panggang`;
+        }
         
-        // Add touch styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .touch-active {
-                opacity: 0.9;
-                transform: scale(0.98) !important;
-            }
+        updateActiveNavLink(pageId) {
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('data-page');
+                if (linkPage === pageId) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+        
+        setupTabs() {
+            const jadwalTabs = document.querySelectorAll('.jadwal-tab');
+            jadwalTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    this.switchJadwalTab(tabId);
+                });
+            });
+        }
+        
+        switchJadwalTab(tabId) {
+            // Update active tab
+            document.querySelectorAll('.jadwal-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelector(`.jadwal-tab[data-tab="${tabId}"]`).classList.add('active');
             
-            @media (max-width: 768px) {
-                .nav-link {
-                    min-height: 50px;
-                    min-width: 50px;
+            // Show corresponding content
+            document.getElementById('piket-tab').style.display = 'none';
+            document.getElementById('pelajaran-tab').style.display = 'none';
+            document.getElementById('kegiatan-tab').style.display = 'none';
+            document.getElementById(`${tabId}-tab`).style.display = 'block';
+        }
+        
+        resetJadwalTabs() {
+            // Reset to first tab
+            this.switchJadwalTab('piket');
+        }
+        
+        setupGalleryFilter() {
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Update active button
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    
+                    // Filter gallery items
+                    galleryItems.forEach(item => {
+                        const category = item.getAttribute('data-category');
+                        
+                        if (filterValue === 'all' || category === filterValue) {
+                            item.style.display = 'block';
+                            setTimeout(() => {
+                                item.style.opacity = '1';
+                                item.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            item.style.opacity = '0';
+                            item.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                item.style.display = 'none';
+                            }, 300);
+                        }
+                    });
+                });
+            });
+        }
+        
+        setupMusicPlayer() {
+            this.music = document.getElementById('backgroundMusic');
+            const toggleBtn = document.getElementById('musicToggle');
+            const playIcon = toggleBtn.querySelector('i');
+            
+            // Set volume to 30% by default
+            this.music.volume = 0.3;
+            
+            toggleBtn.addEventListener('click', () => {
+                if (this.isPlaying) {
+                    this.music.pause();
+                    playIcon.className = 'fas fa-play';
+                    toggleBtn.classList.add('paused');
+                } else {
+                    this.music.play().catch(e => {
+                        console.log("Autoplay prevented. User interaction required.");
+                        toggleBtn.classList.add('paused');
+                    });
+                    playIcon.className = 'fas fa-pause';
+                    toggleBtn.classList.remove('paused');
+                }
+                this.isPlaying = !this.isPlaying;
+            });
+            
+            // Auto-play after user interaction
+            document.addEventListener('click', () => {
+                if (!this.music.played.length) {
+                    this.music.play().then(() => {
+                        this.music.pause();
+                        this.isPlaying = false;
+                        playIcon.className = 'fas fa-play';
+                        toggleBtn.classList.add('paused');
+                    }).catch(e => {
+                        // User hasn't interacted yet
+                    });
+                }
+            }, { once: true });
+        }
+        
+        setupSearchFunctionality() {
+            const searchInput = document.getElementById('searchAnggota');
+            if (!searchInput) return;
+            
+            searchInput.addEventListener('input', (e) => {
+                this.searchAnggota(e.target.value);
+            });
+        }
+        
+        searchAnggota(query) {
+            const memberCards = document.querySelectorAll('.member-card');
+            const queryLower = query.toLowerCase().trim();
+            
+            memberCards.forEach(card => {
+                const memberName = card.querySelector('.member-name').textContent.toLowerCase();
+                
+                if (queryLower === '' || memberName.includes(queryLower)) {
+                    card.style.display = 'flex';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'translateY(20px)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+        
+        setupGallery() {
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            const modal = document.getElementById('galleryModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDescription = document.getElementById('modalDescription');
+            const modalDate = document.getElementById('modalDate');
+            const closeModal = document.querySelector('.close-modal');
+            
+            galleryItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    const img = item.querySelector('img');
+                    const caption = item.querySelector('.gallery-caption');
+                    const title = caption.querySelector('h4').textContent;
+                    const description = caption.querySelector('p').textContent;
+                    const date = caption.querySelector('.gallery-date span').textContent;
+                    
+                    modalImage.src = img.src;
+                    modalImage.alt = img.alt;
+                    modalTitle.textContent = title;
+                    modalDescription.textContent = description;
+                    modalDate.textContent = date;
+                    
+                    modal.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                item.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        item.click();
+                    }
+                });
+            });
+            
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('show');
+                document.body.style.overflow = '';
+            });
+            
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('show')) {
+                    modal.classList.remove('show');
+                    document.body.style.overflow = '';
+                }
+            });
+            
+            this.setupLazyLoading();
+        }
+        
+        setupLazyLoading() {
+            const imageObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        if (img.dataset.src) {
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                        }
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+            
+            document.querySelectorAll('.gallery-item img').forEach(img => {
+                const originalSrc = img.src;
+                img.dataset.src = originalSrc;
+                img.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="600" height="400" viewBox="0 0 600 400"%3E%3Crect width="600" height="400" fill="%231a1a2e"/%3E%3Ctext x="50%" y="50%" font-family="Arial" font-size="20" fill="%2300d4ff" text-anchor="middle" dy=".3em"%3ELoading...%3C/text%3E%3C/svg%3E';
+                imageObserver.observe(img);
+            });
+        }
+        
+        setupScrollTop() {
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollTopBtn.classList.add('show');
+                } else {
+                    scrollTopBtn.classList.remove('show');
+                }
+            });
+            
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
+        
+        setupTypingEffect() {
+            const typingElement = document.getElementById('typingElement');
+            if (!typingElement) return;
+            
+            let currentIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            let isCursorVisible = true;
+            
+            const typeEffect = () => {
+                const currentText = this.homeFeatures.typingTexts[currentIndex];
+                
+                if (isDeleting) {
+                    typingElement.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                } else {
+                    typingElement.textContent = currentText.substring(0, charIndex + 1);
+                    charIndex++;
                 }
                 
-                .neon-button {
-                    min-height: 50px;
-                    min-width: 50px;
+                let typeSpeed = isDeleting ? 50 : 100;
+                
+                if (!isDeleting && charIndex === currentText.length) {
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    currentIndex = (currentIndex + 1) % this.homeFeatures.typingTexts.length;
+                    typeSpeed = 500;
                 }
                 
-                .gallery-item, .member-card {
-                    cursor: pointer;
+                // Add cursor
+                if (!typingElement.querySelector('.cursor')) {
+                    const cursor = document.createElement('span');
+                    cursor.className = 'cursor';
+                    typingElement.appendChild(cursor);
                 }
-            }
-            
-            * {
-                -webkit-tap-highlight-color: transparent;
-            }
-            
-            .page-container {
-                -webkit-overflow-scrolling: touch;
-            }
-            
-            .member-card {
-                transition: opacity 0.4s ease, transform 0.4s ease;
-            }
-            
-            /* Floating particles background */
-            .particles {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                pointer-events: none;
-                z-index: 0;
-            }
-            
-            .particle {
-                position: absolute;
-                background: var(--primary-color);
-                border-radius: 50%;
-                opacity: 0.2;
-                animation: floatParticle linear infinite;
-            }
-            
-            @keyframes floatParticle {
-                0% {
-                    transform: translateY(100vh) rotate(0deg);
+                
+                // Blink cursor
+                const cursor = typingElement.querySelector('.cursor');
+                if (cursor) {
+                    isCursorVisible = !isCursorVisible;
+                    cursor.style.opacity = isCursorVisible ? '1' : '0';
                 }
-                100% {
-                    transform: translateY(-100px) rotate(360deg);
-                }
-            }
+                
+                setTimeout(typeEffect, typeSpeed);
+            };
             
-            /* Highlight current day in schedule */
-            .current-day {
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .current-day::before {
-                content: 'HARI INI';
-                position: absolute;
-                top: 5px;
-                right: 5px;
-                background: var(--gradient-primary);
-                color: white;
-                font-size: 0.7rem;
-                padding: 2px 5px;
-                border-radius: 3px;
-                font-weight: bold;
-            }
-        `;
-        document.head.appendChild(style);
+            setTimeout(typeEffect, 1000);
+        }
         
-        // Create floating particles
-        const createParticles = () => {
+        setupDeviceOptimizations() {
+            if (this.isIOS()) {
+                this.applyIOSFixes();
+            }
+            
+            if (this.isAndroid()) {
+                this.applyAndroidFixes();
+            }
+            
+            if (this.isTouchDevice()) {
+                this.applyTouchOptimizations();
+            }
+        }
+        
+        isIOS() {
+            return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        }
+        
+        isAndroid() {
+            return /Android/.test(navigator.userAgent);
+        }
+        
+        isTouchDevice() {
+            return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        }
+        
+        applyIOSFixes() {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+            
+            document.addEventListener('touchstart', (e) => {
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                    document.body.style.zoom = '100%';
+                }
+            });
+            
+            document.body.style.webkitOverflowScrolling = 'touch';
+        }
+        
+        applyAndroidFixes() {
+            window.addEventListener('resize', () => {
+                if (document.activeElement.tagName === 'INPUT' || 
+                    document.activeElement.tagName === 'TEXTAREA') {
+                    window.scrollTo(0, 0);
+                }
+            });
+        }
+        
+        applyTouchOptimizations() {
+            document.querySelectorAll('.neon-button, .nav-link, .gallery-item, .member-card').forEach(el => {
+                el.addEventListener('touchstart', () => {
+                    el.classList.add('touch-active');
+                });
+                
+                el.addEventListener('touchend', () => {
+                    setTimeout(() => {
+                        el.classList.remove('touch-active');
+                    }, 150);
+                });
+            });
+            
+            document.addEventListener('touchstart', () => {}, { passive: true });
+        }
+        
+        setupParticles() {
+            window.addEventListener('load', () => {
+                this.createParticles();
+            });
+        }
+        
+        createParticles() {
             const particlesContainer = document.createElement('div');
             particlesContainer.className = 'particles';
             document.body.appendChild(particlesContainer);
@@ -3946,10 +4779,282 @@
                 
                 particlesContainer.appendChild(particle);
             }
-        };
+        }
+    }
+    
+    // Initialize website
+    document.addEventListener('DOMContentLoaded', () => {
+        const website = new KelasIXCWebsite();
         
-        // Create particles after page loads
-        window.addEventListener('load', createParticles);
-    </script>
-</body>
-</html>
+        // Handle initial page based on URL hash
+        const hash = window.location.hash.substring(1);
+        const validPages = ['home', 'anggota', 'pengurus', 'wali', 'galeri', 'jadwal', 'info'];
+        
+        if (hash && validPages.includes(hash)) {
+            website.navigateToPage(hash, false);
+            
+            // Update active nav link based on hash
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('data-page');
+                if (linkPage === hash) {
+                    link.classList.add('active');
+                } else {
+                    link.classList.remove('active');
+                }
+            });
+        }
+        
+        // Make website globally available
+        window.kelasIXCWebsite = website;
+    });
+    
+    // Add touch styles and additional CSS
+    const style = document.createElement('style');
+    style.textContent = `
+        .touch-active {
+            opacity: 0.9;
+            transform: scale(0.98) !important;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-link {
+                min-height: 50px;
+                min-width: 50px;
+            }
+            
+            .neon-button {
+                min-height: 50px;
+                min-width: 50px;
+            }
+            
+            .gallery-item, .member-card {
+                cursor: pointer;
+            }
+            
+            /* Responsive countdown */
+            .countdown-timer {
+                gap: 1rem !important;
+            }
+            
+            .countdown-number {
+                font-size: 1.8rem !important;
+                min-width: 55px !important;
+            }
+            
+            .clock-display {
+                font-size: 1.5rem !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .countdown-timer {
+                gap: 0.5rem !important;
+            }
+            
+            .countdown-number {
+                font-size: 1.5rem !important;
+                min-width: 45px !important;
+            }
+            
+            .countdown-label {
+                font-size: 0.7rem !important;
+            }
+        }
+        
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .page-container {
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .member-card {
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        
+        /* Floating particles background */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--primary-color);
+            border-radius: 50%;
+            opacity: 0.2;
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+            }
+        }
+        
+        /* Highlight current day in schedule */
+        .current-day {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .current-day::before {
+            content: 'HARI INI';
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: var(--gradient-primary);
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+        
+        /* Countdown styles */
+        .countdown-timer {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .countdown-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 70px;
+        }
+        
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            line-height: 1;
+            background: rgba(0, 212, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 10px;
+            min-width: 70px;
+            display: inline-block;
+            text-align: center;
+            border: 2px solid rgba(0, 212, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .countdown-number:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
+        }
+        
+        .countdown-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Stats animation */
+        @keyframes countUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stat-number {
+            animation: countUp 1s ease-out;
+        }
+        
+        /* Home description */
+        .home-description {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            max-width: 600px;
+        }
+        
+        /* Class motto */
+        .class-motto {
+            position: relative;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            display: inline-block;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: var(--primary-color);
+            font-style: italic;
+            transition: all 0.3s ease;
+        }
+        
+        .class-motto:hover {
+            background: rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        /* Quote container animation */
+        .quote-container {
+            transition: all 0.3s ease;
+        }
+        
+        .quote-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.2);
+        }
+        
+        /* Live clock animation */
+        .clock-display {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .clock-display:hover {
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(157, 78, 221, 0.5);
+        }
+        
+        /* Additional button styles */
+        .home-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+        
+        .home-buttons .neon-button {
+            flex: 1;
+            min-width: 200px;
+            justify-content: center;
+        }
+        
+        /* Feature tags enhancement */
+        .feature-tag {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .feature-tag:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.2);
+        }
+    `;
+    document.head.appendChild(style);
+</script>
