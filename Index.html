@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="Website resmi Kelas IX C SMP Negeri 1 Panggang - Aplikasi Kelas Digital dengan Sistem Admin Terintegrasi">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Kelas 9C">
+<title>Kelas IX C — SMP Negeri 1 Panggang</title>
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.json">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- LOADING SCREEN FAILSAFE -->
+<script>
+(function(){
+  var HARD_LIMIT = 3000;
+  function nuke(){ var e=document.getElementById('ls'); if(e) e.style.cssText='display:none!important'; }
+  setTimeout(nuke, HARD_LIMIT);
+  window.addEventListener('load', function(){ setTimeout(nuke, 400); });
+})();
+</script>
+
+<style>
+/* ═══════════════════════════════════════════
+   CSS VARIABLES & RESET - OPTIMIZED MOBILE
+═══════════════════════════════════════════ */
+:root{
+  --c0:#0a0a0f;--c1:#0f0f1a;--c2:#1a1a2e;
+  --glass:rgba(15,15,30,0.85);
+  --glass2:rgba(20,20,45,0.8);
+  --border:rgba(0,212,255,0.14);
+  --border2:rgba(0,212,255,0.28);
+  --p:#00d4ff;--pa:#9d4edd;--ps:#ff6b6b;--pg:#00ff88;
+  --gp:linear-gradient(135deg,#00d4ff 0%,#9d4edd 100%);
+  --gs:linear-gradient(135deg,#ff6b6b 0%,#ff9800 100%);
+  --tw:#fff;--tm:rgba(255,255,255,0.6);--td:rgba(255,255,255,0.35);
+  --r:20px;--rl:32px;--rs:12px;
+  --blur:blur(20px) saturate(1.8);
+  --t:all .28s cubic-bezier(.4,0,.2,1);
+  --nav-h:0rem; /* Hide desktop header */
+  --bnav-h:4.5rem;
+  --safe-b:env(safe-area-inset-bottom, 0px);
+  --safe-t:env(safe-area-inset-top, 0px);
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;font-size:14px}
+@media(min-width:768px){html{font-size:16px}}
+body{
+  font-family:'Plus Jakarta Sans',sans-serif;
+  background:var(--c0);color:var(--tw);
+  min-height:100vh;overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--bnav-h) + var(--safe-b) + 0.5rem);
+}
+img{display:block;max-width:100%}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+/* ═══════════════════════════════════════════
+   LOADING SCREEN - ELEGAN
+═══════════════════════════════════════════ */
+#ls{
+  position:fixed;inset:0;z-index:9999;
+  background:linear-gradient(135deg,var(--c0) 0%,var(--c2) 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+  animation:ls-auto-hide .5s ease 2.8s forwards;
+}
+@keyframes ls-auto-hide{to{opacity:0;visibility:hidden;pointer-events:none}}
+.ls-icon{
+  width:100px;height:100px;
+  background:var(--gp);border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;
+  box-shadow:0 0 80px rgba(0,212,255,0.5);
+  animation:ls-float 2s ease-in-out infinite;
+}
+@keyframes ls-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.ls-title{
+  font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;
+  background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:.05em;
+}
+.ls-bar-wrap{width:min(300px,70vw);height:5px;background:rgba(255,255,255,0.1);border-radius:10px;overflow:hidden}
+.ls-bar{height:100%;background:var(--gp);border-radius:10px;width:0;transition:width .2s ease}
+.ls-text{font-size:.85rem;color:var(--td);letter-spacing:.15em;font-weight:500}
+
+/* ═══════════════════════════════════════════
+   BOTTOM NAVIGATION - OPTIMIZED MOBILE-FIRST
+═══════════════════════════════════════════ */
+.bnav{
+  position:fixed;bottom:0;left:0;right:0;z-index:600;
+  height:calc(var(--bnav-h) + var(--safe-b));
+  padding-bottom:var(--safe-b);
+  background:rgba(10,10,20,0.92);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border-top:1px solid var(--border2);
+  display:flex;align-items:stretch;
+  box-shadow:0 -8px 32px rgba(0,0,0,0.3);
+}
+.bn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:.25rem;color:var(--td);
+  transition:all .2s ease;
+  font-size:.6rem;letter-spacing:.04em;font-weight:600;text-transform:uppercase;
+  padding:.4rem .1rem;position:relative;
+}
+.bn::after{
+  content:'';position:absolute;top:0;left:30%;right:30%;
+  height:3px;background:var(--gp);border-radius:0 0 3px 3px;
+  opacity:0;transition:opacity .2s;
+}
+.bn.active::after{opacity:1}
+.bn.active{color:var(--p);transform:translateY(-2px)}
+.bn:active{transform:scale(.92)}
+.bn i{font-size:1.5rem;line-height:1;margin-bottom:2px}
+@media(min-width:769px){.bnav{display:none}}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT - OPTIMIZED PADDING
+═══════════════════════════════════════════ */
+.page{display:none;min-height:100vh;padding-top:1rem;padding-bottom:2rem}
+.page.active{display:block;animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.wrap{max-width:1200px;margin:0 auto;padding:0 1rem}
+@media(min-width:640px){.wrap{padding:0 1.5rem}}
+@media(min-width:1024px){.wrap{padding:0 2rem}}
+
+/* ═══════════════════════════════════════════
+   SECTION TITLE - ELEGAN
+═══════════════════════════════════════════ */
+.sec-head{text-align:center;margin-bottom:2rem;padding-top:1.5rem}
+.sec-head h2{
+  font-family:'Syne',sans-serif;font-size:clamp(1.8rem,6vw,3rem);
+  font-weight:800;background:var(--gp);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;
+}
+.sec-head p{color:var(--tm);font-size:.95rem;max-width:600px;margin:0 auto;line-height:1.7}
+.sec-line{width:80px;height:4px;background:var(--gp);border-radius:2px;margin:.75rem auto 0}
+
+/* ═══════════════════════════════════════════
+   GLASSMORPHISM CARD - PREMIUM
+═══════════════════════════════════════════ */
+.glass-card{
+  background:var(--glass2);
+  backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  box-shadow:0 8px 32px rgba(0,0,0,0.4),0 1px 0 rgba(255,255,255,0.05) inset;
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.glass-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--border2);
+  box-shadow:0 20px 48px rgba(0,212,255,0.2),0 1px 0 rgba(255,255,255,0.1) inset;
+}
+
+/* ═══════════════════════════════════════════
+   PAGE: HOME - OPTIMIZED
+═══════════════════════════════════════════ */
+.hero{
+  min-height:90svh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:2rem 1rem;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 60% at 20% 20%,rgba(0,212,255,.15) 0%,transparent 70%),
+    radial-gradient(ellipse 60% 70% at 80% 80%,rgba(157,78,221,.15) 0%,transparent 70%),
+    radial-gradient(ellipse 50% 50% at 50% 100%,rgba(255,107,107,.1) 0%,transparent 60%);
+  z-index:0;pointer-events:none;
+}
+.hero-photo{
+  width:min(200px,50vw);height:min(200px,50vw);
+  border-radius:50%;object-fit:cover;
+  border:3px solid rgba(0,212,255,.4);
+  box-shadow:0 0 60px rgba(0,212,255,.3);
+  margin:0 auto 1.5rem;
+  animation:ls-float 4s ease-in-out infinite;
+}
+.hero h1{
+  font-family:'Syne',sans-serif;font-size:clamp(2.5rem,12vw,5rem);
+  font-weight:800;line-height:1.1;margin-bottom:1rem;
+}
+.hero h1 .grd{background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.hero-sub{color:var(--tm);font-size:clamp(.9rem,3vw,1.1rem);margin-bottom:2rem;line-height:1.7;max-width:520px;margin-left:auto;margin-right:auto}
+.hero-stats{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-bottom:2rem}
+.hstat{
+  background:var(--glass2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--border);border-radius:16px;
+  padding:1rem 1.5rem;text-align:center;min-width:90px;
+}
+.hstat-n{font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:var(--p);line-height:1}
+.hstat-l{font-size:.7rem;color:var(--td);margin-top:.2rem;letter-spacing:.06em;text-transform:uppercase}
+.hero-btns{display:flex;gap:.875rem;flex-wrap:wrap;justify-content:center}
+.btn{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-weight:700;font-size:.9rem;letter-spacing:.03em;
+  padding:.8rem 2rem;border-radius:50px;
+  transition:var(--t);cursor:pointer;border:none;
+}
+.btn:active{transform:scale(.95)}
+.btn-pri{background:var(--gp);color:#fff;box-shadow:0 8px 24px rgba(0,212,255,.3)}
+.btn-pri:hover{opacity:.9;transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,212,255,.5)}
+.btn-out{background:transparent;border:2px solid rgba(0,212,255,.5);color:var(--p)}
+.btn-out:hover{background:rgba(0,212,255,.15);border-color:var(--p)}
+
+/* ═══════════════════════════════════════════
+   PAGE: ANGGOTA - GRID OPTIMIZED MOBILE
+═══════════════════════════════════════════ */
+.member-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:1rem;
+}
+@media(min-width:480px){.member-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1.25rem}}
+@media(min-width:768px){.member-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1.5rem}}
+
+.member-card{
+  background:var(--glass2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;cursor:pointer;
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+}
+.member-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(0,212,255,.4);
+  box-shadow:0 15px 40px rgba(0,212,255,.2);
+}
+.mc-photo-wrap{position:relative;overflow:hidden;aspect-ratio:1}
+.mc-photo{width:100%;height:100%;object-fit:cover;transition:transform .5s ease}
+.member-card:hover .mc-photo{transform:scale(1.1)}
+.mc-frame{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,20,.7) 0%,transparent 60%)}
+.mc-no{
+  position:absolute;top:.5rem;right:.5rem;
+  background:rgba(0,0,0,.7);backdrop-filter:blur(8px);
+  color:var(--p);font-size:.65rem;font-weight:700;
+  padding:.2rem .5rem;border-radius:8px;
+}
+.mc-body{padding:.8rem .5rem}
+.mc-name{font-size:.75rem;font-weight:700;color:var(--tw);line-height:1.4;margin-bottom:.2rem}
+.mc-role{font-size:.65rem;color:var(--p);font-weight:600}
+.mc-role.ketua{color:#ffd700}
+.mc-role.wakil{color:#00e5ff}
+.mc-role.sekret{color:#00ff88}
+.mc-role.bendahara{color:#ff9800}
+.mc-role.dev{color:#c084fc}
+
+/* ═══════════════════════════════════════════
+   PAGE: GALERI - OPTIMIZED GRID & LIVE PHOTO
+═══════════════════════════════════════════ */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  gap:.875rem;
+}
+@media(min-width:480px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem}}
+@media(min-width:768px){.gallery-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.25rem}}
+
+.gallery-item{
+  background:var(--glass2);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--border);border-radius:var(--r);
+  overflow:hidden;cursor:pointer;
+  transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease;
+  display:flex;flex-direction:column;
+}
+.gallery-item:hover{transform:translateY(-6px);border-color:var(--border2);box-shadow:0 15px 40px rgba(0,212,255,.2)}
+.gi-head{position:relative;overflow:hidden;aspect-ratio:4/3;flex-shrink:0}
+.gi-img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;display:block}
+.gallery-item:hover .gi-img{transform:scale(1.08)}
+.gi-video{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  opacity:0;transition:opacity .4s ease;z-index:2;
+}
+.gallery-item:hover .gi-video{opacity:1}
+.gallery-item:hover .gi-img{opacity:0}
+.gi-cat{
+  position:absolute;top:.5rem;left:.5rem;z-index:3;
+  font-size:.6rem;font-weight:700;padding:.2rem .6rem;border-radius:6px;
+  backdrop-filter:blur(8px);letter-spacing:.06em;text-transform:uppercase;
+}
+.gi-cat-umum{background:rgba(0,212,255,.9);color:#000}
+.gi-cat-eskul{background:rgba(157,78,221,.9);color:#fff}
+.gi-cat-ujian{background:rgba(255,152,0,.9);color:#000}
+.gi-cat-wisata{background:rgba(0,255,136,.9);color:#000}
+.gi-cat-kegiatan{background:rgba(255,107,107,.9);color:#fff}
+.gi-cat-prestasi{background:rgba(255,215,0,.95);color:#000}
+.gi-live-badge{
+  position:absolute;bottom:.5rem;right:.5rem;z-index:3;
+  background:rgba(255,107,107,.95);color:#fff;font-size:.6rem;font-weight:700;
+  padding:.2rem .5rem;border-radius:5px;letter-spacing:.06em;
+}
+.gi-body{padding:.7rem .6rem;flex:1}
+.gi-title{font-size:.75rem;font-weight:700;color:var(--tw);line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gi-desc{font-size:.65rem;color:var(--td);margin-top:.2rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.5}
+.gi-foot{
+  padding:.5rem .6rem;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;
+}
+.gi-date{font-size:.6rem;color:var(--td);display:flex;align-items:center;gap:.25rem}
+.gi-tag{font-size:.55rem;padding:.15rem .5rem;border-radius:5px;font-weight:600}
+
+/* ═══════════════════════════════════════════
+   MUSIC PLAYER - FLOATING ELEGAN
+═══════════════════════════════════════════ */
+.music-player{
+  position:fixed;z-index:550;
+  background:var(--glass);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);
+  border:1px solid var(--border2);border-radius:60px;
+  padding:.6rem 1.2rem;display:flex;align-items:center;gap:.875rem;
+  box-shadow:0 8px 32px rgba(0,0,0,0.5);
+  transition:var(--t);
+  bottom:calc(var(--bnav-h) + var(--safe-b) + 1rem);right:1rem;
+}
+.music-player:hover{border-color:var(--p);box-shadow:0 0 30px rgba(0,212,255,.4)}
+.music-btn{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--gp);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.2rem;transition:var(--t);flex-shrink:0;border:none;cursor:pointer;
+}
+.music-btn:hover{transform:scale(1.15)}
+.music-info{font-size:.75rem}
+.music-info .song-name{color:var(--p);font-weight:700;display:block}
+.music-info .song-hint{color:var(--td);font-size:.65rem}
+
+/* ═══════════════════════════════════════════
+   SCROLL TO TOP
+═══════════════════════════════════════════ */
+.scroll-top{
+  position:fixed;z-index:550;
+  bottom:calc(var(--bnav-h) + var(--safe-b) + 5rem);right:1rem;
+  width:48px;height:48px;border-radius:50%;
+  background:var(--gp);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-size:1.2rem;
+  box-shadow:0 6px 20px rgba(0,212,255,.4);cursor:pointer;border:none;
+  opacity:0;pointer-events:none;transition:var(--t);
+}
+.scroll-top.show{opacity:1;pointer-events:all}
+.scroll-top:hover{transform:scale(1.15);box-shadow:0 10px 28px rgba(0,212,255,.6)}
+
+/* ═══════════════════════════════════════════
+   PWA INSTALL BANNER - ELEGAN
+═══════════════════════════════════════════ */
+.pwa-banner{
+  position:fixed;z-index:550;
+  bottom:calc(var(--bnav-h) + var(--safe-b) + .5rem);
+  left:.875rem;right:.875rem;max-width:400px;margin:0 auto;
+  background:rgba(15,15,30,.98);border:1px solid rgba(0,212,255,.4);border-radius:20px;
+  padding:1rem 1.25rem;display:flex;align-items:center;gap:1rem;
+  box-shadow:0 12px 40px rgba(0,0,0,.6);
+  transform:translateY(200%);transition:transform .4s cubic-bezier(.34,1.56,.64,1);
+}
+.pwa-banner.show{transform:translateY(0)}
+.pwa-icon{font-size:2.5rem;flex-shrink:0}
+.pwa-text{flex:1}
+.pwa-text strong{color:var(--p);font-size:.9rem;display:block;margin-bottom:.2rem}
+.pwa-text span{color:var(--td);font-size:.75rem}
+.pwa-btns{display:flex;flex-direction:column;gap:.4rem;flex-shrink:0}
+.pwa-install{background:var(--gp);color:#fff;border:none;padding:.5rem 1rem;border-radius:10px;font-size:.8rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:opacity .2s}
+.pwa-install:hover{opacity:.9}
+.pwa-dismiss{background:transparent;border:none;color:var(--td);font-size:.7rem;cursor:pointer;padding:.2rem}
+.pwa-dismiss:hover{color:var(--tw)}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+.footer{background:var(--c1);border-top:1px solid var(--border);padding:2rem 1rem;text-align:center}
+.footer-brand{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;background:var(--gp);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem}
+.footer-copy{font-size:.8rem;color:var(--td)}
+
+/* ═══════════════════════════════════════════
+   MODAL - ELEGAN
+═══════════════════════════════════════════ */
+.modal-bg{
+  position:fixed;inset:0;z-index:800;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(15px);-webkit-backdrop-filter:blur(15px);
+  display:none;align-items:center;justify-content:center;padding:1rem;
+}
+.modal-bg.open{display:flex;animation:fadeIn .2s ease}
+.modal-box{
+  background:rgba(15,15,30,.98);
+  border:1px solid var(--border2);border-radius:var(--rl);
+  width:100%;max-width:26rem;max-height:85vh;overflow-y:auto;
+  position:relative;
+  animation:modal-in .25s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes modal-in{from{opacity:0;transform:scale(.9) translateY(1rem)}to{opacity:1;transform:none}}
+.modal-photo{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--rl) var(--rl) 0 0}
+.modal-body{padding:1.5rem}
+.modal-name{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;color:var(--tw);margin-bottom:.25rem}
+.modal-role{font-size:.8rem;color:var(--p);font-weight:600;margin-bottom:1rem}
+.modal-info{display:flex;flex-direction:column;gap:.8rem}
+.mi{display:flex;gap:.75rem;align-items:flex-start;font-size:.85rem}
+.mi-k{color:var(--p);font-size:.7rem;font-weight:700;min-width:75px;padding-top:.1rem;letter-spacing:.04em;opacity:.8}
+.mi-v{color:var(--tm);flex:1;word-break:break-word;line-height:1.5}
+.modal-close{
+  position:absolute;top:.75rem;right:.75rem;
+  width:2rem;height:2rem;border-radius:50%;
+  background:rgba(255,107,107,.2);border:1px solid rgba(255,107,107,.4);
+  color:#ff6b6b;display:flex;align-items:center;justify-content:center;
+  font-size:.9rem;cursor:pointer;transition:var(--t);
+}
+.modal-close:hover{background:rgba(255,107,107,.4);transform:scale(1.15)}
+
+/* ═══════════════════════════════════════════
+   TOAST NOTIFICATION
+═══════════════════════════════════════════ */
+.toast{
+  position:fixed;top:1.5rem;left:50%;transform:translateX(-50%) translateY(-2rem);
+  background:rgba(10,10,20,.98);backdrop-filter:blur(20px);
+  border:1px solid rgba(0,212,255,.4);color:var(--p);
+  padding:.7rem 1.5rem;border-radius:30px;font-size:.8rem;font-weight:600;
+  z-index:9000;opacity:0;pointer-events:none;transition:all .3s ease;white-space:nowrap;box-shadow:0 8px 24px rgba(0,0,0,.3);
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+</style>
+</head>
+<body>
+
+<!-- LOADING SCREEN -->
+<div id="ls">
+  <div class="ls-icon">🎓</div>
+  <div class="ls-title">KELAS IX C</div>
+  <div class="ls-bar-wrap"><div class="ls-bar" id="lsBar"></div></div>
+  <div class="ls-text">MEMUAT WEBSITE KELAS...</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- BOTTOM NAVIGATION - MOBILE FIRST (UTAMA) -->
+<nav class="bnav">
+  <button class="bn active" data-page="home"><i class="fas fa-home"></i>BERANDA</button>
+  <button class="bn" data-page="anggota"><i class="fas fa-users"></i>ANGGOTA</button>
+  <button class="bn" data-page="pengurus"><i class="fas fa-star"></i>PENGURUS</button>
+  <button class="bn" data-page="galeri"><i class="fas fa-images"></i>GALERI</button>
+  <button class="bn" data-page="jadwal"><i class="fas fa-calendar-alt"></i>JADWAL</button>
+  <button class="bn" data-page="info"><i class="fas fa-info-circle"></i>INFO</button>
+</nav>
+
+<!-- MUSIC PLAYER -->
+<div class="music-player">
+  <button class="music-btn" id="musicBtn"><i class="fas fa-play"></i></button>
+  <div class="music-info">
+    <span class="song-name">Kelas IX C Theme</span>
+    <span class="song-hint">Ketuk untuk memutar</span>
+  </div>
+</div>
+<audio id="bgMusic" loop src="https://files.catbox.moe/zdkr55.mp3"></audio>
+
+<!-- SCROLL TO TOP -->
+<button class="scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></button>
+
+<!-- PWA BANNER -->
+<div class="pwa-banner" id="pwaBanner">
+  <div class="pwa-icon">📱</div>
+  <div class="pwa-text">
+    <strong>Instal Aplikasi Kelas 9C</strong>
+    <span>Akses lebih cepat dari layar utama</span>
+  </div>
+  <div class="pwa-btns">
+    <button class="pwa-install" id="pwaBtn">INSTAL</button>
+    <button class="pwa-dismiss" onclick="dismissPWA()">Nanti</button>
+  </div>
+</div>
+
+<!-- PAGES -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <img src="https://files.catbox.moe/w8waor.jpg" class="hero-photo" alt="Foto Kelas IX C" onerror="this.style.display='none'">
+    <div class="hero-content">
+      <h1>Kelas <span class="grd">IX C</span></h1>
+      <p class="hero-sub">SMP Negeri 1 Panggang · Gunungkidul<br>30 Anggota · 1 Keluarga Besar</p>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-n">30</div><div class="hstat-l">Siswa</div></div>
+        <div class="hstat"><div class="hstat-n">5</div><div class="hstat-l">Pengurus</div></div>
+        <div class="hstat"><div class="hstat-n">2026</div><div class="hstat-l">Angkatan</div></div>
+      </div>
+      <div class="hero-btns">
+        <button class="btn btn-pri" onclick="goPage('anggota')"><i class="fas fa-users"></i> Lihat Anggota</button>
+        <button class="btn btn-out" onclick="goPage('galeri')"><i class="fas fa-images"></i> Galeri</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-anggota">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Anggota Kelas</h2>
+      <p>30 siswa-siswi hebat Kelas IX C</p>
+      <div class="sec-line"></div>
+    </div>
+    <div style="margin-bottom:1.5rem;position:relative">
+      <input id="memberSearch" type="text" placeholder="🔍 Cari nama anggota..."
+        style="width:100%;background:var(--glass2);backdrop-filter:var(--blur);border:1px solid var(--border);color:var(--tw);padding:.8rem 1.5rem;border-radius:60px;font-size:.9rem;outline:none;"
+        oninput="filterMembers(this.value)">
+    </div>
+    <div class="member-grid" id="memberGrid"></div>
+  </div>
+</div>
+
+<div class="page" id="page-pengurus">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Pengurus Kelas</h2>
+      <p>Struktur pengurus Kelas IX C</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="wali-card glass-card" style="display:flex;align-items:center;gap:1.5rem;padding:1.5rem;margin-bottom:2rem">
+      <img src="https://files.catbox.moe/7q0fwf.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid rgba(157,78,221,.5)" onerror="this.style.display='none'">
+      <div>
+        <div style="font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;margin-bottom:.2rem">KUSDARYANTA, S.Pd.</div>
+        <div style="color:var(--tm);font-size:.85rem">Wali Kelas IX C · Guru Bahasa Indonesia</div>
+      </div>
+    </div>
+    <div class="pengurus-grid" id="pengurusGrid"></div>
+  </div>
+</div>
+
+<div class="page" id="page-galeri">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Galeri Kelas</h2>
+      <p>Momen-momen indah Kelas IX C</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="gallery-filter" style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.5rem;justify-content:center" id="galleryFilter">
+      <button class="gf-btn active" data-cat="all" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">Semua</button>
+      <button class="gf-btn" data-cat="umum" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">📸 Umum</button>
+      <button class="gf-btn" data-cat="eskul" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">🏃 Eskul</button>
+      <button class="gf-btn" data-cat="karya-wisata" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">🚌 Wisata</button>
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+    <div id="galleryEmpty" style="display:none;text-align:center;padding:3rem;color:var(--td)">Belum ada foto</div>
+  </div>
+</div>
+
+<div class="page" id="page-jadwal">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Jadwal Kelas</h2>
+      <p>Jadwal pelajaran dan piket</p>
+      <div class="sec-line"></div>
+    </div>
+    <div class="jadwal-tabs" style="display:flex;gap:.5rem;margin-bottom:1.5rem;flex-wrap:wrap">
+      <button class="jt active" data-day="0" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">Senin</button>
+      <button class="jt" data-day="1" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">Selasa</button>
+      <button class="jt" data-day="2" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">Rabu</button>
+      <button class="jt" data-day="3" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">Kamis</button>
+      <button class="jt" data-day="4" style="padding:.5rem 1rem;border-radius:30px;background:rgba(255,255,255,.06);border:1px solid var(--border);color:var(--td)">Jumat</button>
+    </div>
+    <div class="jadwal-table-wrap" style="overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)">
+      <table class="jadwal-table" style="width:100%;border-collapse:collapse" id="jadwalTable"></table>
+    </div>
+    <div style="margin-top:2.5rem">
+      <h3 style="font-family:'Syne',sans-serif;text-align:center;margin-bottom:1.5rem;color:var(--p)">Jadwal Piket</h3>
+      <div class="piket-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem" id="piketGrid"></div>
+    </div>
+  </div>
+</div>
+
+<div class="page" id="page-info">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Informasi Kelas</h2>
+      <p>Profil dan kontak Kelas IX C</p>
+      <div class="sec-line"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.25rem">
+      <div class="glass-card" style="padding:1.5rem">
+        <div style="font-size:2rem;margin-bottom:.875rem">🏫</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.5rem">Profil Sekolah</h3>
+        <p style="font-size:.85rem;color:var(--tm)"><strong>Nama:</strong> SMP Negeri 1 Panggang<br><strong>Kelas:</strong> IX C<br><strong>Tahun Ajaran:</strong> 2025/2026</p>
+      </div>
+      <div class="glass-card" style="padding:1.5rem">
+        <div style="font-size:2rem;margin-bottom:.875rem">📍</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.5rem">Alamat</h3>
+        <p style="font-size:.85rem;color:var(--tm)">Panggang III, Giriharjo, Kec. Panggang, Gunungkidul, DIY 55872</p>
+      </div>
+      <div class="glass-card" style="padding:1.5rem">
+        <div style="font-size:2rem;margin-bottom:.875rem">📱</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.5rem">Media Sosial</h3>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+          <a href="https://www.tiktok.com/@_spensaga9c" target="_blank" style="background:rgba(0,212,255,.1);padding:.4rem 1rem;border-radius:30px;color:var(--p);font-size:.8rem"><i class="fab fa-tiktok"></i> TikTok</a>
+        </div>
+      </div>
+      <div class="glass-card" style="padding:1.5rem">
+        <div style="font-size:2rem;margin-bottom:.875rem">🔑</div>
+        <h3 style="font-family:'Syne',sans-serif;font-size:1rem;margin-bottom:.5rem">Panel Admin</h3>
+        <p style="font-size:.85rem;color:var(--tm);margin-bottom:.75rem">Kelola konten website</p>
+        <a href="admin.html" class="btn btn-pri" style="font-size:.8rem;padding:.6rem 1.25rem"><i class="fas fa-shield-alt"></i> Buka Admin Panel</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-brand">🎓 KELAS IX C</div>
+  <div class="footer-copy">© 2025 Website Kelas IX C SMP Negeri 1 Panggang</div>
+</footer>
+
+<!-- MEMBER MODAL -->
+<div class="modal-bg" id="memberModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <img id="mPhoto" src="" alt="" class="modal-photo" onerror="this.style.display='none'">
+    <div class="modal-body">
+      <div class="modal-name" id="mName"></div>
+      <div class="modal-role" id="mRole"></div>
+      <div class="modal-info">
+        <div class="mi"><span class="mi-k">ABSEN</span><span class="mi-v" id="mAbsen"></span></div>
+        <div class="mi"><span class="mi-k">HOBI</span><span class="mi-v" id="mHobi"></span></div>
+        <div class="mi"><span class="mi-k">CITA-CITA</span><span class="mi-v" id="mCita"></span></div>
+        <div class="mi"><span class="mi-k">BAKAT</span><span class="mi-v" id="mBakat"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// DATA KELAS
+const DP = 'https://files.catbox.moe/7q0fwf.jpg';
+const MEMBERS = [
+  {no:1,name:'ALIFIA CANTIKA BANGUN PRAHESTI',jabatan:'Ketua Kelas',photo:DP,hobi:'Berorganisasi',cita:'Pemimpin',bakat:'Leadership'},
+  {no:2,name:"ALYA NUR'AINI",jabatan:'',photo:DP,hobi:'Membaca',cita:'Dokter',bakat:'Menyanyi'},
+  {no:3,name:'ARLISTA NURROHMAN',jabatan:'',photo:DP,hobi:'Melukis',cita:'Guru',bakat:'Seni Rupa'},
+  {no:4,name:'ASSYIFA KHEINA RAMADHANI',jabatan:'Sekretaris',photo:DP,hobi:'Menulis',cita:'Sekretaris',bakat:'Administrasi'},
+  {no:5,name:'AULIA NOVITASARI',jabatan:'',photo:DP,hobi:'Desain',cita:'Arsitek',bakat:'Menggambar'},
+  {no:6,name:'AZHAR ROUF MAULANA',jabatan:'',photo:DP,hobi:'Coding',cita:'Programmer',bakat:'Game Dev'},
+  {no:7,name:'AZZAHRA OKTAVIANDA',jabatan:'',photo:DP,hobi:'Psikologi',cita:'Psikolog',bakat:'Konseling'},
+  {no:8,name:'BRIAN APRILLIO WILLIANDONO',jabatan:'',photo:DP,hobi:'Robotika',cita:'Insinyur',bakat:'Elektronika'},
+  {no:9,name:'CELSHY ARUM SARI',jabatan:'',photo:DP,hobi:'Memasak',cita:'Chef',bakat:'Kuliner'},
+  {no:10,name:'DEFRIKO AHMAD MAULANA',jabatan:'',photo:DP,hobi:'Latihan',cita:'Tentara',bakat:'Atletik'},
+  {no:11,name:'DIGKI REFAN ARYANTO',jabatan:'',photo:DP,hobi:'Konten',cita:'Youtuber',bakat:'Videografi'},
+  {no:12,name:'ERIN ABNASARI',jabatan:'',photo:DP,hobi:'Menulis',cita:'Jurnalis',bakat:'Menulis Cerita'},
+  {no:13,name:'FACHRA ALFIANA SULISTIYO',jabatan:'',photo:DP,hobi:'Bisnis',cita:'Pengusaha',bakat:'Kewirausahaan'},
+  {no:14,name:'FYOREL OKTO MARDHANI',jabatan:'',photo:DP,hobi:'Gitar',cita:'Musisi',bakat:'Komposisi'},
+  {no:15,name:'IZZATUR RAHMAN',jabatan:'',photo:DP,hobi:'Astronomi',cita:'Astronom',bakat:'Ilmu Bintang'},
+  {no:16,name:'KIRANA ALAYKA PUTRI',jabatan:'',photo:DP,hobi:'Desain Grafis',cita:'Designer',bakat:'Fashion'},
+  {no:17,name:'KRISTDANE ABIB RAMADINATA',jabatan:'',photo:DP,hobi:'Sains',cita:'Ilmuwan',bakat:'Penelitian'},
+  {no:18,name:'MUHAMMAD NUR FATHIN',jabatan:'Developer',photo:DP,hobi:'Coding',cita:'Developer',bakat:'Web'},
+  {no:19,name:'NURAIDA ULYA SHABRINA',jabatan:'Bendahara 2',photo:DP,hobi:'Menghitung',cita:'Akuntan',bakat:'Keuangan'},
+  {no:20,name:'OKTAVIANI',jabatan:'',photo:DP,hobi:'Matematika',cita:'Akuntan',bakat:'Analisis Data'},
+  {no:21,name:'PRIANDITA KHOIRUNNISA',jabatan:'Bendahara 1',photo:DP,hobi:'Keuangan',cita:'Bankir',bakat:'Manajemen'},
+  {no:22,name:'PRIWANUKY ZHILAN SAIFI',jabatan:'Wakil Ketua',photo:DP,hobi:'Organisasi',cita:'Pengusaha',bakat:'Kepemimpinan'},
+  {no:23,name:'RADITYA BAYU NURRAHMAN',jabatan:'',photo:DP,hobi:'Basket',cita:'Atlet',bakat:'Olahraga'},
+  {no:24,name:'RINDA FANI NAFTALENA',jabatan:'',photo:DP,hobi:'Membaca',cita:'Penulis',bakat:'Menulis'},
+  {no:25,name:'SELFI FEBRIANI',jabatan:'',photo:DP,hobi:'Memasak',cita:'Chef',bakat:'Kuliner'},
+  {no:26,name:'TITO FANDY NUGROHO',jabatan:'',photo:DP,hobi:'Gaming',cita:'Game Dev',bakat:'Teknologi'},
+  {no:27,name:'TRIATMOKO',jabatan:'',photo:DP,hobi:'Olahraga',cita:'Pelatih',bakat:'Atletik'},
+  {no:28,name:'TRISKA RAHMA SOLIKHA',jabatan:'',photo:DP,hobi:'Novel',cita:'Penulis',bakat:'Sastra'},
+  {no:29,name:'YASINTA DEWI SITA',jabatan:'',photo:DP,hobi:'Menari',cita:'Koreografer',bakat:'Seni Tari'},
+  {no:30,name:'YUNIATI',jabatan:'',photo:DP,hobi:'Berkebun',cita:'Petani',bakat:'Agrikultur'},
+];
+
+const JABATAN_STYLE = {
+  'Ketua Kelas': {cls:'pj-ketua',icon:'👑'},
+  'Wakil Ketua': {cls:'pj-wakil',icon:'⭐'},
+  'Sekretaris': {cls:'pj-sekret',icon:'📝'},
+  'Bendahara 1': {cls:'pj-bendahara',icon:'💰'},
+  'Bendahara 2': {cls:'pj-bendahara',icon:'💰'},
+  'Developer': {cls:'pj-dev',icon:'💻'},
+};
+
+const JADWAL = [
+  {hari:'Senin', rows:[
+    {t:'07.00–07.40',m:'Upacara Bendera'},{t:'07.40–08.20',m:'Bahasa Indonesia'},{t:'08.20–09.00',m:'Bahasa Indonesia'},
+    {t:'09.00–09.40',m:'Matematika'},{t:'09.40–10.00',m:'Istirahat'},{t:'10.00–10.40',m:'Matematika'},
+    {t:'10.40–11.20',m:'IPA'},{t:'11.20–12.00',m:'IPA'},{t:'12.00–12.30',m:'Istirahat'},{t:'12.30–13.10',m:'Penjaskes'}
+  ]},
+  {hari:'Selasa', rows:[
+    {t:'07.00–07.40',m:'IPS'},{t:'07.40–08.20',m:'IPS'},{t:'08.20–09.00',m:'Bahasa Inggris'},
+    {t:'09.00–09.40',m:'Bahasa Inggris'},{t:'09.40–10.00',m:'Istirahat'},{t:'10.00–10.40',m:'PKN'},
+    {t:'10.40–11.20',m:'PKN'},{t:'11.20–12.00',m:'Agama'},{t:'12.00–12.30',m:'Istirahat'},{t:'12.30–13.10',m:'Agama'}
+  ]},
+  {hari:'Rabu', rows:[
+    {t:'07.00–07.40',m:'Matematika'},{t:'07.40–08.20',m:'Matematika'},{t:'08.20–09.00',m:'IPA'},
+    {t:'09.00–09.40',m:'IPA'},{t:'09.40–10.00',m:'Istirahat'},{t:'10.00–10.40',m:'Seni Budaya'},
+    {t:'10.40–11.20',m:'Seni Budaya'},{t:'11.20–12.00',m:'Prakarya'},{t:'12.00–12.30',m:'Istirahat'},{t:'12.30–13.10',m:'Prakarya'}
+  ]},
+  {hari:'Kamis', rows:[
+    {t:'07.00–07.40',m:'Bahasa Indonesia'},{t:'07.40–08.20',m:'Bahasa Indonesia'},{t:'08.20–09.00',m:'Bahasa Inggris'},
+    {t:'09.00–09.40',m:'Bahasa Inggris'},{t:'09.40–10.00',m:'Istirahat'},{t:'10.00–10.40',m:'BK'},
+    {t:'10.40–11.20',m:'TIK'},{t:'11.20–12.00',m:'TIK'},{t:'12.00–12.30',m:'Istirahat'},{t:'12.30–13.10',m:'IPS'}
+  ]},
+  {hari:'Jumat', rows:[
+    {t:'07.00–07.40',m:'Tadarus/Apel'},{t:'07.40–08.20',m:'Matematika'},{t:'08.20–09.00',m:'Matematika'},
+    {t:'09.00–09.40',m:'Bahasa Indonesia'},{t:'09.40–10.00',m:'Istirahat'},{t:'10.00–10.40',m:'IPS'},{t:'10.40–11.00',m:'Pulang'}
+  ]},
+];
+
+const PIKET = [
+  {hari:'Senin', names:['Alifia (1)','Alya (2)','Arlista (3)','Assyifa (4)','Aulia (5)','Azhar (6)']},
+  {hari:'Selasa', names:['Azzahra (7)','Brian (8)','Celshy (9)','Defriko (10)','Digki (11)','Erin (12)']},
+  {hari:'Rabu', names:['Fachra (13)','Fyorel (14)','Izzatur (15)','Kirana (16)','Kristdane (17)','Muhammad (18)']},
+  {hari:'Kamis', names:['Nuraida (19)','Oktaviani (20)','Priandita (21)','Priwanuky (22)','Raditya (23)','Rinda (24)']},
+  {hari:'Jumat', names:['Selfi (25)','Tito (26)','Triatmoko (27)','Triska (28)','Yasinta (29)','Yuniati (30)']},
+];
+
+// GALLERY DATA
+function getGallery() {
+  const saved = JSON.parse(localStorage.getItem('9c_gallery') || '[]');
+  const defaults = [
+    {url:'https://files.catbox.moe/w8waor.jpg',title:'Foto Kelas IX C',desc:'Foto bersama keluarga besar',date:'2025-07-01',cat:'umum',is_video:false},
+    {url:'https://files.catbox.moe/zdkr55.mp3',title:'Video Kegiatan',desc:'Momen seru di kelas',date:'2025-07-15',cat:'kegiatan',is_video:true},
+  ];
+  return [...saved, ...defaults];
+}
+
+// LOADING SCREEN
+(function(){
+  var bar = document.getElementById('lsBar');
+  var ls = document.getElementById('ls');
+  if (!ls) return;
+  var prog = 0;
+  var iv = setInterval(function(){
+    prog += Math.random() * 20 + 10;
+    if (prog >= 100) { prog = 100; clearInterval(iv); hide(); }
+    if (bar) bar.style.width = prog + '%';
+  }, 120);
+  function hide() {
+    if (ls._done) return;
+    ls._done = true;
+    if (bar) bar.style.width = '100%';
+    ls.style.transition = 'opacity .4s ease';
+    ls.style.opacity = '0';
+    setTimeout(() => ls.style.display = 'none', 450);
+  }
+  setTimeout(hide, 2600);
+})();
+
+// NAVIGATION
+function goPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  var pg = document.getElementById('page-' + name);
+  if (pg) pg.classList.add('active');
+  document.querySelectorAll('.bn').forEach(b => b.classList.toggle('active', b.dataset.page === name));
+  if (name === 'anggota') renderMembers();
+  if (name === 'pengurus') renderPengurus();
+  if (name === 'galeri') renderGallery();
+  if (name === 'jadwal') renderJadwal(currentDay);
+  window.scrollTo({top:0, behavior:'smooth'});
+  history.replaceState(null,'','#' + name);
+}
+
+document.querySelectorAll('.bn').forEach(btn => {
+  btn.addEventListener('click', function() { goPage(this.dataset.page); });
+});
+
+// RENDER MEMBERS
+let allMembers = MEMBERS;
+function renderMembers(list = allMembers) {
+  const grid = document.getElementById('memberGrid');
+  if (!grid) return;
+  grid.innerHTML = list.map(m => {
+    let roleClass = '';
+    if (m.jabatan === 'Ketua Kelas') roleClass = 'ketua';
+    else if (m.jabatan === 'Wakil Ketua') roleClass = 'wakil';
+    else if (m.jabatan === 'Sekretaris') roleClass = 'sekret';
+    else if (m.jabatan?.includes('Bendahara')) roleClass = 'bendahara';
+    else if (m.jabatan === 'Developer') roleClass = 'dev';
+    return `<div class="member-card" onclick="openMember(${m.no - 1})">
+      <div class="mc-photo-wrap"><img class="mc-photo" src="${m.photo}" alt="${m.name}" loading="lazy" onerror="this.src='${DP}'"><div class="mc-frame"></div><span class="mc-no">#${m.no}</span></div>
+      <div class="mc-body"><div class="mc-name">${m.name}</div><div class="mc-role ${roleClass}">${m.jabatan || 'Anggota'}</div></div>
+    </div>`;
+  }).join('');
+}
+
+function filterMembers(q) {
+  renderMembers(allMembers.filter(m => m.name.toLowerCase().includes(q.toLowerCase())));
+}
+
+function openMember(idx) {
+  const m = allMembers[idx];
+  if (!m) return;
+  document.getElementById('mPhoto').src = m.photo;
+  document.getElementById('mName').textContent = m.name;
+  document.getElementById('mRole').textContent = m.jabatan ? (JABATAN_STYLE[m.jabatan]?.icon + ' ' + m.jabatan) : '🎓 Anggota';
+  document.getElementById('mAbsen').textContent = '#' + m.no;
+  document.getElementById('mHobi').textContent = m.hobi || '—';
+  document.getElementById('mCita').textContent = m.cita || '—';
+  document.getElementById('mBakat').textContent = m.bakat || '—';
+  document.getElementById('memberModal').classList.add('open');
+}
+
+function closeModal() { document.getElementById('memberModal').classList.remove('open'); }
+document.getElementById('memberModal')?.addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// RENDER PENGURUS
+function renderPengurus() {
+  const grid = document.getElementById('pengurusGrid');
+  if (!grid) return;
+  const pengurus = MEMBERS.filter(m => m.jabatan);
+  grid.innerHTML = pengurus.map(m => {
+    const jb = JABATAN_STYLE[m.jabatan] || {cls:'pj-dev',icon:'🎓'};
+    return `<div class="glass-card" style="padding:1.5rem 1rem;text-align:center;cursor:pointer" onclick="openMember(${m.no - 1})">
+      <img src="${m.photo}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto .875rem;border:2px solid rgba(0,212,255,.3)" onerror="this.src='${DP}'">
+      <div style="font-size:.8rem;font-weight:700;margin-bottom:.3rem">${m.name}</div>
+      <span style="font-size:.7rem;padding:.2rem .6rem;border-radius:12px;background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:#00d4ff">${jb.icon} ${m.jabatan}</span>
+    </div>`;
+  }).join('');
+}
+
+// RENDER GALLERY
+let currentCat = 'all';
+function renderGallery(cat = currentCat) {
+  currentCat = cat;
+  const items = getGallery();
+  const filtered = cat === 'all' ? items : items.filter(i => i.cat === cat);
+  const grid = document.getElementById('galleryGrid');
+  const empty = document.getElementById('galleryEmpty');
+  if (!grid) return;
+  if (!filtered.length) {
+    grid.innerHTML = '';
+    if (empty) empty.style.display = 'block';
+    return;
+  }
+  if (empty) empty.style.display = 'none';
+  
+  grid.innerHTML = filtered.map(item => {
+    const catClass = {
+      'umum':'gi-cat-umum','eskul':'gi-cat-eskul','ujian':'gi-cat-ujian',
+      'karya-wisata':'gi-cat-wisata','kegiatan':'gi-cat-kegiatan','prestasi':'gi-cat-prestasi'
+    }[item.cat] || 'gi-cat-umum';
+    const catLabel = item.cat === 'karya-wisata' ? 'Wisata' : item.cat || 'Umum';
+    const dateStr = item.date ? new Date(item.date).toLocaleDateString('id-ID',{day:'numeric',month:'short'}) : '';
+    return `<div class="gallery-item">
+      <div class="gi-head">
+        <img class="gi-img" src="${item.url}" alt="${item.title}" loading="lazy" onerror="this.style.display='none'">
+        ${item.is_video ? `<video class="gi-video" src="${item.url}" muted loop playsinline preload="none" onmouseenter="this.play()" onmouseleave="this.pause()"></video>` : ''}
+        <span class="gi-cat ${catClass}">${catLabel}</span>
+        ${item.is_video ? '<span class="gi-live-badge">LIVE</span>' : ''}
+      </div>
+      <div class="gi-body">
+        <div class="gi-title">${item.title || 'Tanpa Judul'}</div>
+        ${item.desc ? `<div class="gi-desc">${item.desc}</div>` : ''}
+      </div>
+      <div class="gi-foot">
+        <span class="gi-date"><i class="far fa-calendar"></i> ${dateStr || '—'}</span>
+        <span class="gi-tag" style="background:rgba(0,212,255,.1);border:1px solid rgba(0,212,255,.3);color:#00d4ff">${catLabel}</span>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+document.querySelectorAll('.gf-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.gf-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    renderGallery(this.dataset.cat);
+  });
+});
+
+// RENDER JADWAL
+const today = new Date().getDay();
+const todayJadwal = today >= 1 && today <= 5 ? today - 1 : 0;
+let currentDay = todayJadwal;
+
+function renderJadwal(dayIdx) {
+  const table = document.getElementById('jadwalTable');
+  if (!table) return;
+  const d = JADWAL[dayIdx];
+  table.innerHTML = `
+    <thead><tr><th style="padding:.75rem 1rem;background:rgba(0,212,255,.1);color:var(--p)">Waktu</th><th style="padding:.75rem 1rem;background:rgba(0,212,255,.1);color:var(--p)">Mata Pelajaran ${dayIdx === todayJadwal ? '<span style="background:var(--gp);color:#fff;font-size:.6rem;padding:.2rem .6rem;border-radius:4px;margin-left:.5rem">HARI INI</span>' : ''}</th></tr></thead>
+    <tbody>${d.rows.map(r => `<tr><td style="padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--p);font-weight:600">${r.t}</td><td style="padding:.7rem 1rem;border-bottom:1px solid rgba(255,255,255,.04);color:var(--tm)">${r.m}</td></tr>`).join('')}</tbody>`;
+}
+
+function renderPiket() {
+  const grid = document.getElementById('piketGrid');
+  if (!grid) return;
+  grid.innerHTML = PIKET.map(p => `
+    <div class="glass-card" style="padding:1rem">
+      <div style="font-family:'Syne',sans-serif;font-size:.85rem;color:var(--p);margin-bottom:.625rem">🧹 ${p.hari}</div>
+      <div style="display:flex;flex-wrap:wrap;gap:.35rem">${p.names.map(n => `<span style="background:rgba(0,212,255,.08);border:1px solid rgba(0,212,255,.2);color:var(--p);font-size:.65rem;padding:.2rem .6rem;border-radius:6px">${n}</span>`).join('')}</div>
+    </div>`).join('');
+}
+
+document.querySelectorAll('.jt').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.jt').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    currentDay = +this.dataset.day;
+    renderJadwal(currentDay);
+  });
+});
+
+// MUSIC PLAYER
+const music = document.getElementById('bgMusic');
+let musicPlaying = false;
+document.getElementById('musicBtn')?.addEventListener('click', function() {
+  if (musicPlaying) { music.pause(); this.innerHTML = '<i class="fas fa-play"></i>'; }
+  else { music.play().catch(() => {}); this.innerHTML = '<i class="fas fa-pause"></i>'; }
+  musicPlaying = !musicPlaying;
+});
+
+// SCROLL TO TOP
+const stBtn = document.getElementById('scrollTop');
+window.addEventListener('scroll', () => stBtn.classList.toggle('show', window.scrollY > 400));
+stBtn.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+// TOAST
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// PWA INSTALL
+let deferredPrompt = null;
+function dismissPWA() {
+  localStorage.setItem('9c_pwa_no','1');
+  document.getElementById('pwaBanner').classList.remove('show');
+}
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (!localStorage.getItem('9c_pwa_no')) setTimeout(() => document.getElementById('pwaBanner').classList.add('show'), 4000);
+});
+document.getElementById('pwaBtn').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const res = await deferredPrompt.userChoice;
+  if (res.outcome === 'accepted') { dismissPWA(); showToast('✅ Aplikasi terinstal!'); }
+  deferredPrompt = null;
+});
+window.addEventListener('appinstalled', dismissPWA);
+
+// SERVICE WORKER
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+
+// INIT
+renderMembers();
+renderPengurus();
+renderGallery();
+renderJadwal(currentDay);
+renderPiket();
+
+// HANDLE HASH
+if (location.hash) {
+  const page = location.hash.substring(1);
+  if (['home','anggota','pengurus','galeri','jadwal','info'].includes(page)) goPage(page);
+}
+</script>
+</body>
+</html>
