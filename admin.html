@@ -646,11 +646,15 @@ let selectedFiles = [];
 
 /* ── Init ──────────────────────────────────────────── */
 function init() {
-  loadConfig();
-  renderMembers();
-  renderGallery();
-  updateDashStats();
-  initUploadZone();
+  try { loadConfig(); } catch(e) { console.warn('loadConfig:', e); }
+  try { renderMembers(); } catch(e) { console.warn('renderMembers:', e); }
+  try { renderGallery(); } catch(e) { console.warn('renderGallery:', e); }
+  try { updateDashStats(); } catch(e) {}
+  try { initUploadZone(); } catch(e) { console.warn('initUploadZone:', e); }
+  // Render jadwal & lagu (dari update sebelumnya)
+  try { if(typeof renderJadwalEditTable==='function') renderJadwalEditTable(); } catch(e) {}
+  try { if(typeof renderPiketEdit==='function') renderPiketEdit(); } catch(e) {}
+  try { if(typeof renderLagu==='function') renderLagu(); } catch(e) {}
 }
 
 function updateDashStats() {
@@ -664,7 +668,13 @@ function switchPanel(name, btn) {
   document.getElementById('panel-' + name)?.classList.add('active');
   document.querySelectorAll('.bn-btn').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  else document.querySelector(`[data-panel="${name}"]`)?.classList.add('active');
+  else document.querySelector('[data-panel="' + name + '"]')?.classList.add('active');
+  // Render konten sesuai panel yang dibuka
+  if (name === 'members') renderMembers();
+  if (name === 'gallery') { renderGallery(); updateDashStats(); }
+  if (name === 'jadwal')  { renderJadwalEditTable(); renderPiketEdit(); }
+  if (name === 'lagu')    renderLagu();
+  if (name === 'settings') renderAkunTab();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -870,18 +880,29 @@ function deleteGalleryItem(i) {
 /* ── Member Render ──────────────────────────────────── */
 function renderMembers() {
   const grid = document.getElementById('memberGrid');
-  const saved = JSON.parse(localStorage.getItem('9c_members') || '{}');
-  grid.innerHTML = STUDENTS.map((s, i) => {
-    const data = { ...s, ...saved[s.no] };
-    return `
-      <div class="mm-card" onclick="openMemberEdit(${i})">
-        <span class="mm-absen">#${s.no}</span>
-        <img class="mm-avatar" src="${data.photo}" alt="${data.name}" onerror="this.src='https://files.catbox.moe/7q0fwf.jpg'" loading="lazy">
-        <div class="mm-name">${data.name}</div>
-        <div class="mm-role">${data.jabatan || 'Anggota'}</div>
-        <div class="mm-edit-overlay"><i class="fas fa-pencil-alt"></i></div>
-      </div>`;
-  }).join('');
+  if (!grid) { console.warn('memberGrid not found'); return; }
+  if (!STUDENTS || !STUDENTS.length) { grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:2rem;color:var(--muted)">Data siswa kosong</div>'; return; }
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem('9c_members') || '{}'); } catch(e) {}
+  const DP = 'https://files.catbox.moe/7q0fwf.jpg';
+  const df = document.createDocumentFragment();
+  STUDENTS.forEach((s, i) => {
+    const ov = saved[s.no] || {};
+    const data = Object.assign({}, s, ov);
+    const div = document.createElement('div');
+    div.className = 'mm-card';
+    div.setAttribute('onclick', 'openMemberEdit(' + i + ')');
+    div.innerHTML =
+      '<span class="mm-absen">#' + s.no + '</span>' +
+      '<img class="mm-avatar" src="' + (data.photo || DP) + '" alt="' + escHtml(data.name) + '" ' +
+        'onerror="this.src=\'' + DP + '\'" loading="lazy">' +
+      '<div class="mm-name">' + escHtml(data.name) + '</div>' +
+      '<div class="mm-role">' + escHtml(data.jabatan || 'Anggota') + '</div>' +
+      '<div class="mm-edit-overlay"><i class="fas fa-pencil-alt"></i></div>';
+    df.appendChild(div);
+  });
+  grid.innerHTML = '';
+  grid.appendChild(df);
 }
 
 function openMemberEdit(idx) {
